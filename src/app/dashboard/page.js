@@ -1,6 +1,6 @@
-import Image from 'next/image'
+
 import RootLayout from '@/layout/layout'
-export default function Home() {
+export default function Reports() {
   return (
 
 
@@ -21,7 +21,7 @@ export default function Home() {
           <div class="max-w-7xl mx-auto text-gray-600 py-2 px-4 sm:px-6 md:px-8">
           
         
-     hello mf
+     hello Dashboard
     
    
            

@@ -1,6 +1,6 @@
-import Image from 'next/image'
+
 import RootLayout from '@/layout/layout'
-export default function Home() {
+export default function Reports() {
   return (
 
 
@@ -15,13 +15,13 @@ export default function Home() {
           x-init="$el.focus()"
         >
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+            <h1 class="text-2xl font-semibold text-gray-900">Reports</h1>
           </div>
 
           <div class="max-w-7xl mx-auto text-gray-600 py-2 px-4 sm:px-6 md:px-8">
           
         
-     hello mf
+     hello reports
     
    
            
