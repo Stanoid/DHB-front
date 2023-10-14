@@ -1,6 +1,20 @@
+'use client'
+
 
 import RootLayout from '@/layout/layout'
+import { MainContext } from '../context/context';
+import { useContext } from 'react';
+import { useEffect } from 'react';
+
 export default function Reports() {
+  const {message, setMessage, login,isLogged} = useContext(MainContext);
+
+  useEffect(()=>{
+    isLogged(2);
+    //console.log(message)
+   },[])
+
+
   return (
 
 

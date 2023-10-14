@@ -1,9 +1,18 @@
+'use client'
 import './globals.css'
-import React from 'react'
+import {React} from 'react'
 import Link from 'next/link';
+import { useRouter,usePathname } from 'next/navigation';
 
 
 export default function RootLayout({ children }) {
+
+  const pathname = usePathname()
+  
+
+
+
+
   return (
     <html lang="en">
    
@@ -17,14 +26,16 @@ export default function RootLayout({ children }) {
     >
       <div class="hidden md:flex md:flex-shrink-0">
         <div class="flex flex-col w-64">
-          <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+          <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900" >
             {/* <img class="h-8 w-auto" src="/img/logos/workflow-logo-on-dark.svg" alt="Workflow" /> */}
           </div>
-          <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+          <div  class="h-0 flex-1 flex flex-col overflow-y-auto" >
             <nav class="flex-1 px-2 py-4 bg-gray-800">
               <a
+
                 href="/dashboard"
-                class="group flex items-center px-2 py-2 text-sm leading-5 font-medium text-white rounded-md bg-gray-900 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
+                class="group flex items-center px-2 py-2 text-sm leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
+                style={{backgroundColor:pathname==="/dashboard"?"#212020":""}}
               >
                 <svg
                   class="mr-3 h-6 w-6 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
@@ -43,6 +54,7 @@ export default function RootLayout({ children }) {
               </a>
               <a
                 href="/reports"
+                style={{backgroundColor:pathname==="/reports"?"#212020":""}}
                 class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
               >
                 <svg
@@ -58,7 +70,7 @@ export default function RootLayout({ children }) {
                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                Team
+                Reports
               </a>
               <a
                 href="#"
