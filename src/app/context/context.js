@@ -24,8 +24,15 @@ const cookies = new Cookies();
     fetch(`${API_URL}/auth/local`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-       cookies.set("login",data);
+        console.log(data,"aaaa");
+
+       if(data.user){
+        router.replace("/dashboard")
+        cookies.set("login",data);
+       }else{
+        alert("invalid username or password")
+       }
+      
      
 
       
@@ -52,17 +59,8 @@ const cookies = new Cookies();
          fetch(`${API_URL}/users/me`, requestOptions)
              .then(response => response.json())
              .then(data =>{
-          console.log(data);
-          if(data.type==pageRole){
-
-          }else{
-            if(data.type==69){
-
-            }else{
-                router.replace("/")
-            }
-          
-          }
+         console.log(data,"aaaaaa");
+       
 
 
               
