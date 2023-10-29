@@ -2,6 +2,7 @@
 import './globals.css'
 import {React} from 'react'
 import Link from 'next/link';
+import Footer from './footer';
 import { useRouter,usePathname } from 'next/navigation';
 
 
@@ -91,25 +92,7 @@ export default function RootLayout({ children }) {
                 </svg>
                 Resources
               </a>
-              <a
-                href="/resorces"
-                class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-              >
-                <svg
-                  class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                Calendar
-              </a>
+             
               <a
                 href="/courses"
                 class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
@@ -147,6 +130,26 @@ export default function RootLayout({ children }) {
                   />
                 </svg>
                 Reports
+              </a>
+
+              <a
+                href="/tests"
+                class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
+              >
+                <svg
+                  class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                Tests
               </a>
             </nav>
           </div>
@@ -250,7 +253,10 @@ export default function RootLayout({ children }) {
           </div>
         </div>
       {children}
+
+
       </div>
+
     </div>
 
        
