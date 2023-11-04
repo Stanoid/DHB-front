@@ -1,26 +1,41 @@
 import React from 'react'
 import Image from 'next/image'
-
+import Enroll from '../iosh/enroll'
 function Course(props) {
   return (
-    <div style={{backgroundColor:"white",display:"flex",flexDirection:"column",borderRadius:10,width:"auto",color:"black",padding:10}}>
+    <div style={{backgroundColor:"white",display:"flex",flexDirection:"column",borderRadius:10,width:"auto",color:"black",padding:15}}>
      <Image
       src= {props.img}
-      width={200}
-      height={200}
+      width={300}
+      height={300}
       alt="IOSH LOGO"
     />
 
-    <div style={{padding:10,textAlign:"center",fontWeight:"bold",fontSize:15}}>
-        <div>{props.title}</div>
 
-<div onClick={()=>{props.getData(1)}} style={{textAlign:"center",marginTop:10}}>
-<div  class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
-rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"> More info </div>
+<div style={{padding:10,fontSize:15,width:300,fontWeight:"bold"}}>
+{props.title}
+</div>
+
+<div style={{fontSize:12.5,marginTop:20}}>
+<Enroll
+ url={props.data.url}
+ short={true}
+ data={{
+  
+  "name":props.title,
+ "price":props.data.price,
+ "duration":props.data.duration,
+ "lang":"English / Arabic",
+ "level":"Basic / Level2",
+ "board":props.data.board,
+ "training":"Virtual / Offline",
+ "etype":"MCQ + Offline",
+ "btype":"Morning / Evening",
+}}  />
+
 </div>
 
 
-    </div>
         </div>
     
   )

@@ -7,16 +7,18 @@ import { useEffect } from "react";
 import { Center, Flex } from "@mantine/core";
 import { API_URL } from "../../../utils/url";
 import Image from "next/image";
-import imgs from "./img/iosh.jpg";
+import iosh from "./img/iosh.jpg";
 import { useState } from "react";
-import imgsn from "./img/nebosh.jpg";
+import emc from "./img/emc.jpg";
+import { useRouter } from "next/navigation";
+import ig from "./img/ig.jpg";
 import Course from "./cunit";
 import Cookies from "universal-cookie";
 export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
 
   const [cdata, setCdata] = useState([]);
-
+  const router = new useRouter();
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
@@ -95,14 +97,16 @@ export default function Reports() {
             alignItems: "center",
           }}
         >
-          {/* 
-<Course getData={()=>{getcourseData()}} title={"IOSH Managing safely"} img={imgs} />
+          
+<Course getData={()=>{router.push("/iosh")}}  data={{"price":"150 USD","duration":"3 Days","board":"IOSH","url":"/iosh"}}  title={"IOSH Managing safely"} img={iosh} />
 
-<Course getData={()=>{getcourseData()}} title={"Nebosh IG"} img={imgsn} />
-<Course getData={()=>{getcourseData()}} title={"Nebosh EMC"} img={imgsn} />
+<Course getData={()=>{router.push("/neboshemc")}} data={{"price":"500 USD","duration":"5 Days","board":"NEBOSH","url":"/neboshemc"}} title={"NEBOSH ENVIRONMENT MANAGEMENT CERTIFICATE (NEBOSH EMC)"} img={emc} />
 
-  */}
-          {cdata.map((item, index) => (
+ 
+
+<Course getData={()=>{router.push("/neboshig")}} data={{"price":"500 USD","duration":"3 Days","board":"NEBOSH","url":"/neboshig"}} title={"Nebosh IG"} img={ig} />
+
+          {/* {cdata.map((item, index) => (
             <Course
               getData={() => {
                 getcourseData();
@@ -110,7 +114,7 @@ export default function Reports() {
               title={item.attributes.name}
               img={imgsn}
             />
-          ))}
+          ))} */}
         </div>
 
         <div class="max-w-7xl mx-auto text-gray-600 py-2 px-4 sm:px-6 md:px-8"></div>

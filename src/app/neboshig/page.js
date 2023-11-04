@@ -7,12 +7,13 @@ import { useEffect } from "react";
 import { API_URL } from "../../../utils/url";
 import Image from "next/image";
 import { useState } from "react";
-import bg from "./img/vec.jpg"
+import bg from "./img/bg.jpg"
 import Accord from "../courses/accord";
 import Citem from "../courses/citem";
-
-import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo } from "react-icons/fa";
-
+import Enroll from "../iosh/enroll";
+import Floating from "../comps/floating";
+import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo,FaUserPlus } from "react-icons/fa";
+import CenteredDiv from "../comps/imghead";
 import Cookies from "universal-cookie";
 export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
@@ -72,17 +73,8 @@ export default function Reports() {
       >
 
 
-{/* <div style={divStyle}>
-      <h1>NEBOSH International General Certificate in Occupational Health and Safety</h1>
-    </div> */}
-
-      {/* <Image
-      src= {bg}
-      style={{width:"100%"}}
-      width={"100%"}
-     
-      alt="Picture of the course"
-    /> */}
+<Floating/>
+<CenteredDiv text={"NEBOSH International General Certificate "} img={bg.src}/>
 
 
     
@@ -212,6 +204,29 @@ fal into the same trap.
  title={"EXTRA INFO"}  icon={FaInfo} />
 </div>
 
+
+
+<div id="enroll" style={{margin:"0px 100px 10px 100px"}}>
+<Citem 
+content={
+ <Enroll
+ 
+ short={false}
+ data={{
+  
+  "name":"NEBOSH IG",
+ "price":"500 USD",
+ "duration":"22 days",
+ "lang":"English  ",
+ "level":"Basic / Level3",
+ "board":"NEBOSH",
+ "training":"Virtual / Offline / Face to face",
+ "etype":"SBA-Open Book Examination +  Practical risk Assessment",
+ "btype":"Morning / Evening",
+}}  />
+}
+ title={"ENROLL NOW"}  icon={FaUserPlus} />
+</div>
 
 
 
