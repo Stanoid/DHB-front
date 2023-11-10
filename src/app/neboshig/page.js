@@ -19,13 +19,16 @@ export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
 
   const [cdata, setCdata] = useState([]);
+  const [bid, setBid] = useState(1);
 
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
-   // getcourses();
+    getBatches();
   }, []);
-  const getcourses = () => {
+
+
+  const getBatches = () => {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -33,11 +36,11 @@ export default function Reports() {
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/courses`, requestOptions)
+    fetch(`${API_URL}/batches?[filters][course]=`+bid, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setCdata(data.data);
-        console.log("object", data);
+        console.log("object", cdata);
       });
   };
 
@@ -210,10 +213,14 @@ fal into the same trap.
 <Citem 
 content={
  <Enroll
+
+
+  
+ table={cdata}
  
  short={false}
+ id={bid}
  data={{
-  
   "name":"NEBOSH IG",
  "price":"500 USD",
  "duration":"22 days",

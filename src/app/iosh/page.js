@@ -276,6 +276,13 @@ your supply chain.
 content={
  <Enroll
  
+ 
+ table={
+  [{"batch":"Day","date":"2/12/2015 to 10/21/2015","edate":"1/11/2015","medium":["Face2face, ", "Online live, ","E-learning (recorded lecture), ", "In-house, "]}
+  ,{"batch":"Night","date":"2/12/2015 to 10/21/2015","edate":"1/11/2015","medium":["Face2face, ", "Online live, ","E-learning (recorded lecture), ", "In-house, "]}
+]
+ }
+
  short={false}
  data={{
   

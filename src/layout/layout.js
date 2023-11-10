@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       x-data="{ sidebarOpen: false }"
     >
       <div class="hidden md:flex md:flex-shrink-0">
-        <div class="flex flex-col w-64">
+        <div class="flex  flex-col w-48">
           <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900" >
             {/* <img class="h-8 w-auto" src="/img/logos/workflow-logo-on-dark.svg" alt="Workflow" /> */}
           </div>
