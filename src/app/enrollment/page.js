@@ -7,6 +7,7 @@ import ReactDom from 'react-dom'
 import Markdown from 'react-markdown'
 import { API_URL } from "../../../utils/url";
 import Image from "next/image";
+import Home from "@/layout/cameraelement";
 import { useState } from "react";
 import bg from "./img/bg.jpg"
 import { useSearchParams } from 'next/navigation'
@@ -25,13 +26,18 @@ export default function Enrollment() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
   const [page, setpage] = useState(1);
   const [cdata, setCdata] = useState(null);
+  const [vid, setVid] = useState(null);
   const [agree, setagree] = useState(false);
+  const [tcheat, setttCheat] = useState(false);
   const [read, setread] = useState(false);
   const [namever, setnameVer] = useState(false);
   const [emailver, setemailVer] = useState(false);
   const [name, setname] = useState(cookies.get("login").user.username);
   const [email, setemail] = useState(cookies.get("login").user.email);
   const [test, setTest] = useState([]);
+  const [results, setResults] = useState(0);
+  const [Ttest, setTTest] = useState([]);
+  const [Ttestresults, setTTestresults] = useState({data:[]});
 
   
 
@@ -43,9 +49,70 @@ export default function Enrollment() {
   }, []);
 
 
+  const signUpFunc =()=>{
+
+    console.table({
+      "id":1,
+      "agreed?": agree,
+      "vid":vid
+    })
+    
+  
+    
+
+  }
+
+
+  const appendAnswer = (data,state)=>{
+//console.log(data,state);
+let vcheck  = false;
+
+if(state.data.length==0){
+  state.data.push(data)
+ // console.table("from zero sum func ",state.data)
+ setTTestresults(state)
+ console.table(Ttestresults.data);
+  return
+}
+
+
+for (let i = 0; i < state.data.length; i++) {
+ if(data.questionid===state.data[i].questionid){
+  state.data[i]= data;
+  vcheck = true;
+ // console.table("from for ",state.data)
+ setTTestresults(state)
+ console.table(Ttestresults.data);
+  return
+ }else{
+
+ }
+}
+
+if (!vcheck){
+  state.data.push(data)
+  setTTestresults(state)
+  console.table(Ttestresults.data);
+//console.table("from if ",state.data);
+ }
+
+
+
+
+
+
+//console.table(Ttestresults.data);
+  }
+
   const nextPage=()=>{
-    if(page ==7){
-      return
+    if(page ==6){
+      if(tcheat==false){
+        alert("Please answer and check your answers using the button");
+        return
+      }
+ 
+   
+     return
     }
 
     if(page==2){
@@ -56,6 +123,21 @@ export default function Enrollment() {
       }
 
     }
+
+    if(page==6){
+
+      if(!vid){
+        alert("Record a video for identification");
+        return
+      }else{
+        signUpFunc();
+
+      }
+
+    }
+
+
+    
     
     
     if(!agree ){
@@ -70,6 +152,22 @@ export default function Enrollment() {
   
   }
 
+
+
+  const checktechnicaltest = ()=>{
+  let score = 0;
+for (let i = 0; i < Ttestresults.data.length; i++) {
+if(Ttestresults.data[i].check ==1){
+  score++
+} }
+
+console.log(score+" out of "+ Ttest.length);
+setResults(score);
+   setttCheat(true); 
+
+
+
+  }
 
   
   const prevPage=()=>{
@@ -116,6 +214,25 @@ export default function Enrollment() {
        
      console.log("test", data.data.attributes.object);
      setTest(data.data.attributes.object);
+     getTechnicalTest();
+      });
+  };
+
+  
+  const getTechnicalTest = () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+      },
+    };
+    fetch(`${API_URL}/tests/`+6, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+       
+     console.log("test", data.data.attributes.object);
+     setTTest(data.data.attributes.object);
       });
   };
 
@@ -166,11 +283,11 @@ export default function Enrollment() {
 </span>  batch of  <span style={{fontWeight:"bold"}}> {cdata&&cdata.course.data.attributes.name} </span></h1>
 </div>
 <div style={{marginTop:20}}>
-<ol  style={{display:"flex",flexDirection:"row"}} class="items-center  space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
+<ol  style={{display:"flex",flexDirection:"row",fontSize:20}} class="items-center  space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
   
-    <li style={{color: page>=1?"#819FF7":"grey", margin:"0px 10px 0px 10px"}}  class="flex items-center space-x-2.5">
-        <span style={{color: page>=1?"white":"grey",backgroundColor: page>=1?"#819FF7":""}} class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0 ">
-            1
+    <li style={{color: page>=1?"#3F99FF":"grey", margin:"0px 10px 0px 10px"}}  class="flex items-center space-x-2.5">
+        <span style={{color: page>=1?"white":"grey",backgroundColor: page>=1?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border rounded-full shrink-0 ">
+          <span>{page>=2? <FaCheckCircle/> : "1"} </span>  
         </span>
         <span  style={{display:page==1?"block":"none",color:"grey"}}> 
             <h3 class="font-medium leading-tight">Terms & Conditions</h3>
@@ -178,9 +295,9 @@ export default function Enrollment() {
         </span>
     </li>
 
-    <li style={{color: page>=2?"#819FF7":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
-        <span style={{color: page>=2?"white":"grey",backgroundColor: page>=2?"#819FF7":""}} class="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
-            2
+    <li style={{color: page>=2?"#3F99FF":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
+        <span style={{color: page>=2?"white":"grey",backgroundColor: page>=2?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border  rounded-full shrink-0 ">
+        <span>{page>=3? <FaCheckCircle/> : "2"} </span> 
         </span>
         <span  style={{display:page==2?"block":"none",color:"grey"}}>
             <h3 class="font-medium leading-tight">Review your information</h3>
@@ -188,9 +305,9 @@ export default function Enrollment() {
         </span>
     </li>
 
-    <li style={{color: page>=3?"#819FF7":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
-        <span style={{color: page>=3?"white":"grey",backgroundColor: page>=3?"#819FF7":""}} class="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
-            3
+    <li style={{color: page>=3?"#3F99FF":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
+        <span style={{color: page>=3?"white":"grey",backgroundColor: page>=3?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border  rounded-full shrink-0 ">
+        <span>{page>=4? <FaCheckCircle/> : "3"} </span> 
         </span>
         <span  style={{display:page==3?"block":"none",color:"grey"}}>
             <h3 class="font-medium leading-tight">Pre-course meeting</h3>
@@ -202,8 +319,8 @@ export default function Enrollment() {
 
 
     <li style={{color: page>=4?"white":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
-        <span style={{color: page>=4?"white":"grey",backgroundColor: page>=4?"#819FF7":""}} class="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0">
-            4
+        <span style={{color: page>=4?"white":"grey",backgroundColor: page>=4?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border  rounded-full shrink-0">
+        <span>{page>=5? <FaCheckCircle/> : "4"} </span> 
         </span>
         <span  style={{display:page==4?"block":"none",color:"grey"}}>
             <h3 class="font-medium leading-tight"> English Test </h3>
@@ -212,11 +329,22 @@ export default function Enrollment() {
     </li>
 
 
-    <li style={{color: page>=5?"#819FF7":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
-        <span style={{color: page>=5?"white":"grey",backgroundColor: page>=5?"#819FF7":""}} class="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
-            5
+    <li style={{color: page>=5?"white":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
+        <span style={{color: page>=5?"white":"grey",backgroundColor: page>=5?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border  rounded-full shrink-0">
+        <span>{page>=6? <FaCheckCircle/> : "5"} </span> 
         </span>
         <span  style={{display:page==5?"block":"none",color:"grey"}}>
+            <h3 class="font-medium leading-tight"> Precourse technical test </h3>
+            <p class="text-sm">Test your knowledge of this course</p>
+        </span>
+    </li>
+
+
+    <li style={{color: page>=6?"#3F99FF":"grey", margin:"0px 10px 0px 10px"}} class="flex items-center space-x-2.5">
+        <span style={{color: page>=6?"white":"grey",backgroundColor: page>=6?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border  rounded-full shrink-0 ">
+        <span>{page>=7? <FaCheckCircle/> : "6"} </span> 
+        </span>
+        <span  style={{display:page==6?"block":"none",color:"grey"}}>
             <h3 class="font-medium leading-tight"> ID check </h3>
             <p class="text-sm">Upload a video to verify your identity</p>
         </span>
@@ -225,9 +353,9 @@ export default function Enrollment() {
    
 
 
-    <li style={{color: page>=6?"#819FF7":"grey", margin:15}} class="flex items-center  space-x-2.5">
-        <span style={{color: page>=6?"white":"grey",backgroundColor: page>=6?"#819FF7":""}} class="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
-            6
+    <li style={{color: page>=7?"#3F99FF":"grey", margin:15}} class="flex items-center  space-x-2.5">
+        <span style={{color: page>=7?"white":"grey",backgroundColor: page>=7?"#3F99FF":""}} class="flex items-center justify-center w-10 h-10 border  rounded-full shrink-0 ">
+        <span>{page>=7? <FaCheckCircle/> : "7"} </span> 
         </span>
         <span  style={{display:page==6?"block":"none",color:"grey"}}>
             <h3 class="font-medium leading-tight">Payment</h3>
@@ -342,9 +470,6 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 
 
 <div style={{display: page==7?"flex":"none",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%"}}>
-
-
-
 <Print data={
   {
     "bname":cdata&&cdata.course.data.attributes.name,
@@ -352,6 +477,14 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
     "price": cdata&&cdata.course.data.attributes.price
   }
 }/>
+</div>
+
+<div style={{display: page==6?"flex":"none",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%",height:500}}>
+
+{page==6?<Home  getVid={((blob)=>{setVid(blob)})}  />:<div></div>
+
+}
+
 
 </div>
 
@@ -397,6 +530,42 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 
 </div>
 
+
+<div style={{display: page==5?"flex":"none",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%"}}>
+{Ttest.map((item, index) => (
+
+<Testelement checkTest={(data)=>{
+   appendAnswer(data,Ttestresults);
+}}  cheat={tcheat} no={index+1} ob = {item}/>
+       
+      ))}
+
+
+<div>
+  
+</div>
+      <div style={{display:tcheat?"flex":"none",flexDirection:"column",justifyContent:"center",
+      alignItems:"center",backgroundColor:"rgba(0,255,0,0.6)",
+       color:"white",fontSize:25,fontWeight:"bold",
+      padding:20,borderRadius:10}}>
+        <div>
+        Your Score:
+        </div>
+
+        <div>
+        {results+ "/"+ Ttest.length}
+        </div>
+       
+      </div>
+
+
+<div style={{textAlign:"center",margin:20,cursor:"pointer"}}>
+<div onClick={()=>{checktechnicaltest(); }}  style={{display:"flex",justifyContent:"center",alignItems:"center"}} class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
+rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"> 
+ <span style={{marginRight:10}}>Check Answers</span> <FaCheckCircle/> </div>
+</div> 
+
+</div>
 
 
 

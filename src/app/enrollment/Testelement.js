@@ -1,6 +1,6 @@
 import {React, useState,useEffect} from 'react'
-
-function Testelement(props) {
+ 
+ const Testelement = (props)=> {
 
 
   
@@ -67,8 +67,14 @@ const renderansers=()=>{
 
 <li style={{marginTop:5}}>
     <div>
-    <input type="radio"  name={item.id}  value={item.an} />
-    <label style={{marginLeft:10,fontSize:15}} for="huey">{item.an }</label>
+    <input type="radio" onChange={(event)=>{props.checkTest(
+      {
+       "answer": event.target.value,
+       "check":item.val,
+       "questionid":item.id
+      }
+    )}}  name={item.id}  value={item.an} />
+    <label style={{marginLeft:10,fontSize:15,backgroundColor:item.val&&props.cheat?"rgba(0,255,0,0.3)":""}} for="huey">{item.an }</label>
   </div>
     </li>
 

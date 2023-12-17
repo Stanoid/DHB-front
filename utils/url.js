@@ -1,9 +1,9 @@
 
 
 
-    export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337/api"
-export const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:1337"
-export const IMG_CONFIG_URL = process.env.NEXT_PUBLIC_IMG_CONFIG_URL || "http://res.cloudinary.com/"
+//     export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337/api"
+// export const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:1337"
+// export const IMG_CONFIG_URL = process.env.NEXT_PUBLIC_IMG_CONFIG_URL || "http://res.cloudinary.com/"
 
 
 // sxsxsxsxs
@@ -11,9 +11,9 @@ export const IMG_CONFIG_URL = process.env.NEXT_PUBLIC_IMG_CONFIG_URL || "http://
 
 
 
-//     export const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://ecmrc-demo.vercel.app/api"
-// export const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL || "https://ecmrc-demo.vercel.app/uploads"
-// export const IMG_CONFIG_URL = process.env.NEXT_PUBLIC_IMG_CONFIG_URL || "http://res.cloudinary.com"
+    export const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://dhback-8b00e5257b7f.herokuapp.com/api"
+export const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL || "https://ecmrc-demo.vercel.app/uploads"
+export const IMG_CONFIG_URL = process.env.NEXT_PUBLIC_IMG_CONFIG_URL || "http://res.cloudinary.com"
 
 
 
