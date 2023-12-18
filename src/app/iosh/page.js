@@ -8,25 +8,27 @@ import { API_URL } from "../../../utils/url";
 import Image from "next/image";
 import { useState } from "react";
 import bg from "./img/bg.jpg"
-import Enroll from "./enroll";
-import CenteredDiv from "../comps/imghead";
 import Accord from "../courses/accord";
 import Citem from "../courses/citem";
+import Enroll from "../iosh/enroll";
 import Floating from "../comps/floating";
 import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo,FaUserPlus } from "react-icons/fa";
-
+import CenteredDiv from "../comps/imghead";
 import Cookies from "universal-cookie";
 export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
 
   const [cdata, setCdata] = useState([]);
+  const [bid, setBid] = useState(2);
 
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
-   // getcourses();
+    getBatches();
   }, []);
-  const getcourses = () => {
+
+
+  const getBatches = () => {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -34,15 +36,31 @@ export default function Reports() {
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/courses`, requestOptions)
+    fetch(`${API_URL}/batches?[filters][course]=`+bid, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setCdata(data.data);
-        console.log("object", data);
+        console.log("object", cdata);
       });
   };
 
 
+  const divStyle = {
+    backgroundImage: `url(${bg.src})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: '300px',
+    backgroundColor:"#81DBFF",
+    backgroundBlendMode:"multiply",
+    display: 'flex',
+    fontSize:25,
+    marginBottom:15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+  };
 
   const getcourseData = (id) => {
     console.log(id);
@@ -58,28 +76,15 @@ export default function Reports() {
       >
 
 
-
 <Floating/>
-
-
-<CenteredDiv text={"IOSH MANAGING SAFELY"} img={bg.src}/>
-
-
-
-      {/* <Image
-      src= {bg}
-      style={{width:"100%"}}
-      width={"100%"}
-     
-      alt="Picture of the course"
-    /> */}
+<CenteredDiv text={"NEBOSH International General Certificate "} img={bg.src}/>
 
 
     
 
     <br/><br/>
 
-<div id="overview" style={{margin:"0px 100px 10px 100px"}}>
+    <div id="overview" style={{margin:"0px 100px 10px 100px"}}>
 <Citem content={"DHB Training and Consulting is an approved centre of IOSH since October 2021. IOSH MS is the successful programme with great cutting edge in propagandizing health and safety.  DHB delivers stepwise guidance and discharge high quality tutors and presentation material makes IOSH Managing Safely training session as the most effective programme. The delegates will find everything they need in this inspiring pack. IOSH Managing Safely courses offered in DHB with trainers who are well qualified and highly experienced will provide a good support to the delegates throughout the training session journey."}
  title={"COURSE OVERVIEW"}  icon={FaList} />
 </div>
@@ -271,34 +276,33 @@ your supply chain.
 
 
 
+
 <div id="enroll" style={{margin:"0px 100px 10px 100px"}}>
 <Citem 
 content={
  <Enroll
- 
- 
- table={
-  [{"batch":"Day","date":"2/12/2015 to 10/21/2015","edate":"1/11/2015","medium":["Face2face, ", "Online live, ","E-learning (recorded lecture), ", "In-house, "]}
-  ,{"batch":"Night","date":"2/12/2015 to 10/21/2015","edate":"1/11/2015","medium":["Face2face, ", "Online live, ","E-learning (recorded lecture), ", "In-house, "]}
-]
- }
 
- short={false}
- data={{
+
   
+ table={cdata}
+ 
+ short={false}
+ id={bid}
+ data={{
   "name":"IOSH MANAGING SAFELY",
- "price":"150 USD",
- "duration":"3 days",
- "lang":"English / Arabic",
- "level":"Basic / Level2",
- "board":"IOSH",
- "training":"Virtual / Offline",
- "etype":"MCQ + Offline",
- "btype":"Morning / Evening",
-}}  />
+  "price":"150 USD",
+  "duration":"3 days",
+  "lang":"English / Arabic",
+  "level":"Basic / Level2",
+  "board":"IOSH",
+  "training":"Virtual / Offline",
+  "etype":"MCQ + Offline",
+  "btype":"Morning / Evening",
+ }}  />
 }
  title={"ENROLL NOW"}  icon={FaUserPlus} />
 </div>
+
 
 
   

@@ -127,16 +127,16 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 
 <tr class="bg-white border-b  dark:border-gray-700">
 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-    {item.attributes.name}
+    {item&&item.attributes.name}
 </th>
 <td class="px-6 py-4 text-gray-700">
-   {item.attributes.start}
+   {item&&item.attributes.start}
 </td>
 <td class="px-6 py-4 text-gray-700">
-{item.medium}
+{item&&item.medium}
 </td>
 <td class="px-6 py-4 text-gray-700">
-    {item.attributes.end}
+    {item&&item.attributes.end}
 </td>
 <td class="px-6 py-4 text-gray-700">
 

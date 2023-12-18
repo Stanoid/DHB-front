@@ -9,24 +9,26 @@ import Image from "next/image";
 import { useState } from "react";
 import bg from "./img/bg.jpg"
 import Accord from "../courses/accord";
-import Floating from "../comps/floating";
 import Citem from "../courses/citem";
 import Enroll from "../iosh/enroll";
-import CenteredDiv from "../comps/imghead";
+import Floating from "../comps/floating";
 import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo,FaUserPlus } from "react-icons/fa";
-
+import CenteredDiv from "../comps/imghead";
 import Cookies from "universal-cookie";
 export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
 
   const [cdata, setCdata] = useState([]);
+  const [bid, setBid] = useState(2);
 
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
-   // getcourses();
+    getBatches();
   }, []);
-  const getcourses = () => {
+
+
+  const getBatches = () => {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -34,11 +36,11 @@ export default function Reports() {
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/courses`, requestOptions)
+    fetch(`${API_URL}/batches?[filters][course]=`+bid, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setCdata(data.data);
-        console.log("object", data);
+        console.log("object", cdata);
       });
   };
 
@@ -73,30 +75,16 @@ export default function Reports() {
         x-init="$el.focus()"
       >
 
-        <Floating/>
 
-
-<CenteredDiv text={"NEBOSH Environmental Management Certificate"} img={bg.src}/>
-
-
-{/* <div style={divStyle}>
-      <h1>NEBOSH International General Certificate in Occupational Health and Safety</h1>
-    </div> */}
-
-      {/* <Image
-      src= {bg}
-      style={{width:"100%"}}
-      width={"100%"}
-     
-      alt="Picture of the course"
-    /> */}
+<Floating/>
+<CenteredDiv text={"NEBOSH International General Certificate "} img={bg.src}/>
 
 
     
 
     <br/><br/>
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+    <div style={{margin:"0px 100px 10px 100px"}}>
 <Citem content={"The NEBOSH Environmental Management Certificate is a globally relevant qualification. You will be able to help your organization manage its positive and negative environmental aspects and support the implementation and continuousimprovement of effective environmental managementsystems."}
  title={"COURSE OVERVIEW"}  icon={FaList} />
 </div>
@@ -217,33 +205,27 @@ ofstudy.
 <Citem 
 content={
  <Enroll
- 
- table={
-  [{"batch":"Day","date":"2/12/2015 to 10/21/2015","edate":"1/11/2015","medium":["Face2face, ", "Online live, ","E-learning (recorded lecture), ", "In-house, "]}
-  ,{"batch":"Night","date":"2/12/2015 to 10/21/2015","edate":"1/11/2015","medium":["Face2face, ", "Online live, ","E-learning (recorded lecture), ", "In-house, "]}
-]
- }
 
- 
+
+  
+ table={cdata}
  
  short={false}
+ id={bid}
  data={{
-  
   "name":"NEBOSH EMC",
- "price":"500 USD",
- "duration":"5 days",
- "lang":"English ",
- "level":"Basic / Level2",
- "board":"NEBOSH",
- "training":"Virtual / Offline / Face to face",
- "etype":"SBA-Open Book Examination + Environmental Impact Assessment",
- "btype":"Morning / Evening",
-}}  />
+  "price":"500 USD",
+  "duration":"5 days",
+  "lang":"English ",
+  "level":"Basic / Level2",
+  "board":"NEBOSH",
+  "training":"Virtual / Offline / Face to face",
+  "etype":"SBA-Open Book Examination + Environmental Impact Assessment",
+  "btype":"Morning / Evening",
+ }}  />
 }
  title={"ENROLL NOW"}  icon={FaUserPlus} />
 </div>
-
-
 
 
 
