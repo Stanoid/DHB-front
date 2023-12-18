@@ -1949,7 +1949,7 @@ console.log(message)
           const cookies = new Cookies();
           cookies.set('login', data.jwt, { path: '/' });
        
-      orouter.replace("/dashboard")
+      router.replace("/dashboard")
   
         }else{
           
