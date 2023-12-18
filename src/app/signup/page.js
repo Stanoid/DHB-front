@@ -1833,7 +1833,7 @@ console.log(message)
     if(age==""||gender==""||nat==""||phone=="",adress==""||cont==""){
     notify("warn","All feilds are requiered")
     }else{
-      setPage(3)
+      login();
     }
 
 
@@ -1887,7 +1887,7 @@ console.log(message)
           notify("warn","Email already exists")
          
         }else{
-         login();
+          setPage(2)
         }
       
       
