@@ -7,7 +7,7 @@ import ReactDom from 'react-dom'
 import Markdown from 'react-markdown'
 import { API_URL } from "../../../utils/url";
 import Image from "next/image";
-import Home from "@/layout/cameraelement";
+// import Home from "@/layout/cameraelement";
 import { useState } from "react";
 import bg from "./img/bg.jpg"
 import { useSearchParams } from 'next/navigation'
@@ -481,10 +481,13 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 
 <div style={{display: page==6?"flex":"none",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%",height:500}}>
 
-{page==6?<Home  getVid={((blob)=>{setVid(blob)})}  />:<div></div>
+{page==6?
+<div></div>:<div>Camera</div>
 
 }
 
+{/* old camera midule (TBF) */}
+{/* <Home  getVid={((blob)=>{setVid(blob)})}  /> */}  
 
 </div>
 
