@@ -6,11 +6,7 @@
 // export const IMG_CONFIG_URL = process.env.NEXT_PUBLIC_IMG_CONFIG_URL || "http://res.cloudinary.com/"
 
 
-<<<<<<< HEAD
 //
-=======
-// 
->>>>>>> 84d0b09c452d8adddf5cf9ec3bf07628de45983e
 
 
 
