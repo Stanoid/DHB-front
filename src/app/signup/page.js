@@ -1887,7 +1887,7 @@ console.log(message)
           notify("warn","Email already exists")
          
         }else{
-          setPage(2)
+         login();
         }
       
       
