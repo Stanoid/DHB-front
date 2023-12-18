@@ -1877,7 +1877,7 @@ console.log(message)
   
 
   
-  fetch(`${API_URL}/users?filters[$and][0][email][$eq]=`+email, requestOptions)
+  fetch(`https://dhback-8b00e5257b7f.herokuapp.com/api/users?filters[$and][0][email][$eq]=`+email, requestOptions)
       .then(response => response.json())
       .then(data =>{
 
