@@ -1833,6 +1833,11 @@ console.log(message)
     if(age==""||gender==""||nat==""||phone=="",adress==""||cont==""){
     notify("warn","All feilds are requiered")
     }else{
+
+
+
+
+
       login();
     }
 
@@ -1880,6 +1885,8 @@ console.log(message)
   fetch(`${API_URL}/users?filters[$and][0][email][$eq]=`+email, requestOptions)
       .then(response => response.json())
       .then(data =>{
+
+
 
 
         if(data.length!=0){
@@ -1936,7 +1943,7 @@ console.log(message)
       )
   };
   
-  //console.log(requestOptions);
+console.log(requestOptions);
   
   fetch(`${API_URL}/auth/local/register`, requestOptions)
       .then(response => response.json())

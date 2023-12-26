@@ -22,7 +22,7 @@ export default function Reports() {
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
-    getcourses();
+   // getcourses();
   }, []);
   const getcourses = () => {
     const requestOptions = {
@@ -37,6 +37,25 @@ export default function Reports() {
       .then((data) => {
         setCdata(data.data);
         console.log("object", data);
+      });
+  };
+
+
+  const getEnrolled = () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+      },
+    };
+    fetch(`${API_URL}/batches/`+NURL.get("bid")+"?populate=course", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+       
+     console.log("object", data);
+     setCdata(data.data.attributes);
+   
       });
   };
 

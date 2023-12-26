@@ -7,7 +7,7 @@ import ReactDom from 'react-dom'
 import Markdown from 'react-markdown'
 import { API_URL } from "../../../utils/url";
 import Image from "next/image";
-// import Home from "@/layout/cameraelement";
+ import Home from "@/layout/cameraelement";
 import { useState } from "react";
 import bg from "./img/bg.jpg"
 import { useSearchParams } from 'next/navigation'
@@ -36,9 +36,12 @@ export default function Enrollment() {
   const [email, setemail] = useState(cookies.get("login").user.email);
   const [test, setTest] = useState([]);
   const [results, setResults] = useState(0);
+  const [Presults, setPResults] = useState(0);
   const [Ttest, setTTest] = useState([]);
   const [Ttestresults, setTTestresults] = useState({data:[]});
-
+  const [Ptest, setPTest] = useState([]);
+  const [Ptestresults, setPTestresults] = useState({data:[]});
+  const [Pcheat, settPCheat] = useState(false);
   
 
   useEffect(() => {
@@ -52,9 +55,10 @@ export default function Enrollment() {
   const signUpFunc =()=>{
 
     console.table({
-      "id":1,
-      "agreed?": agree,
-      "vid":vid
+      "Ttest":Ttest,
+      "Ptest": Ptest,
+      "Ptest_re":Ptestresults,
+      "Ttest_re":Ttestresults,
     })
     
   
@@ -104,11 +108,74 @@ if (!vcheck){
 //console.table(Ttestresults.data);
   }
 
+
+
+
+  const appendAnswerP = (data,state)=>{
+    //console.log(data,state);
+    let vcheck  = false;
+    
+    if(state.data.length==0){
+      state.data.push(data)
+     // console.table("from zero sum func ",state.data)
+     setPTestresults(state)
+     console.table(Ptestresults.data);
+      return
+    }
+    
+    
+    for (let i = 0; i < state.data.length; i++) {
+     if(data.questionid===state.data[i].questionid){
+      state.data[i]= data;
+      vcheck = true;
+     // console.table("from for ",state.data)
+     setPTestresults(state)
+     console.table(Ptestresults.data);
+      return
+     }else{
+    
+     }
+    }
+    
+    if (!vcheck){
+      state.data.push(data)
+      setPTestresults(state)
+      console.table(Ptestresults.data);
+    //console.table("from if ",state.data);
+     }
+    
+    
+    
+    
+    
+    
+    //console.table(Ttestresults.data);
+      }
+
   const nextPage=()=>{
-    if(page ==6){
+if(page>6){
+  // console.log("ddd",page);
+signUpFunc()
+  return;
+}
+    
+    
+    if(page==1 && !agree ){
+      alert("Please Read and Agree with DHB Policies")
+      return
+    }else{
+      setpage(page+1)
+    }
+    
+
+
+
+    if(page ==5){
       if(tcheat==false){
         alert("Please answer and check your answers using the button");
         return
+      }else{
+        setpage(page+1)
       }
  
    
@@ -124,28 +191,27 @@ if (!vcheck){
 
     }
 
+    if(page==7){
+      signUpFunc();
+    }
+
     if(page==6){
+     //console.log("recipt page render")
+     setpage(page+1) 
+      // video element check diabled
 
-      if(!vid){
-        alert("Record a video for identification");
-        return
-      }else{
-        signUpFunc();
+      // if(!vid){
+      //   // alert("Record a video for identification");
+      //   // return
+       
+      // }else{
+      //   setpage(page+1)
 
-      }
+      // }
 
     }
 
 
-    
-    
-    
-    if(!agree ){
-      alert("Please Read and Agree with DHB Policies")
-      return
-    }else{
-      setpage(page+1)
-    }
     
     
     
@@ -168,6 +234,22 @@ setResults(score);
 
 
   }
+
+  
+  const checkPtest = ()=>{
+    let score = 0;
+  for (let i = 0; i < Ptestresults.data.length; i++) {
+  if(Ptestresults.data[i].check ==1){
+    score++
+  } }
+  
+  console.log(score+" out of "+ Ttest.length);
+  setPResults(score);
+     settPCheat(true); 
+  
+  
+  
+    }
 
   
   const prevPage=()=>{
@@ -208,12 +290,12 @@ setResults(score);
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/tests/`+4, requestOptions)
+    fetch(`${API_URL}/tests/`+1, requestOptions)
       .then((response) => response.json())
       .then((data) => {
        
      console.log("test", data.data.attributes.object);
-     setTest(data.data.attributes.object);
+     setPTest(data.data.attributes.object);
      getTechnicalTest();
       });
   };
@@ -227,7 +309,7 @@ setResults(score);
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/tests/`+6, requestOptions)
+    fetch(`${API_URL}/tests/`+1, requestOptions)
       .then((response) => response.json())
       .then((data) => {
        
@@ -487,7 +569,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 }
 
 {/* old camera midule (TBF) */}
-{/* <Home  getVid={((blob)=>{setVid(blob)})}  /> */}  
+<Home  getVid={((blob)=>{setVid(blob)})}  />  
 
 </div>
 
@@ -507,11 +589,13 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
     Watch the video and answer the following questions:
   </div>
 
-  {test.map((item, index) => (
+  {Ptest.map((item, index) => (
 
-    <Testelement no={index+1} ob = {item}/>
-           
-          ))}
+<Testelement checkTest={(data)=>{
+   appendAnswerP(data,Ptestresults);
+}}  cheat={Pcheat} no={index+1} ob = {item}/>
+       
+      ))}
 
 
 
@@ -519,6 +603,25 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
   </div>
 
 
+  <div style={{display:Pcheat?"flex":"none",flexDirection:"column",justifyContent:"center",
+      alignItems:"center",backgroundColor:"rgba(0,255,0,0.6)",
+       color:"white",fontSize:25,fontWeight:"bold",
+      padding:20,borderRadius:10}}>
+        <div>
+        Your Score:
+        </div>
+
+        <div>
+        {Presults+ "/"+ Ptest.length}
+        </div>
+       
+      </div>
+
+      <div style={{textAlign:"center",margin:20,cursor:"pointer"}}>
+<div onClick={()=>{checkPtest(); }}  style={{display:"flex",justifyContent:"center",alignItems:"center"}} class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
+rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"> 
+ <span style={{marginRight:10}}>Check Answers</span> <FaCheckCircle/> </div>
+</div> 
 
 
 
@@ -585,8 +688,10 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 
 
 <div style={{textAlign:"center",marginTop:10,cursor:"pointer"}}>
-<div onClick={()=>{nextPage(); }}  style={{display:"flex",justifyContent:"center",alignItems:"center"}} class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
-rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">  <span style={{marginRight:10}}>NEXT</span> <FaArrowCircleRight/> </div>
+<div onClick={()=>{nextPage(); }}  style={{display:"flex",justifyContent:"center",alignItems:"center"}} 
+class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
+rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">  
+<span style={{marginRight:10}}>{page==7?"ENROLL":"Next"}</span> <FaArrowCircleRight/> </div>
 </div>
 
 

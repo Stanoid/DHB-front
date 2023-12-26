@@ -21,7 +21,7 @@ const getTest = ()=>{
           Authorization: "Bearer " + cookies.get("login").jwt,
         },
       };
-      fetch(`${API_URL}/tests/`+5, requestOptions)
+      fetch(`${API_URL}/tests/`+46, requestOptions)
         .then((response) => response.json())
         .then((data) => {
          
