@@ -13,16 +13,22 @@ import emc from "./img/emc.jpg";
 import { useRouter } from "next/navigation";
 import ig from "./img/ig.jpg";
 import Course from "./cunit";
+
 import Cookies from "universal-cookie";
+
 export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
 
   const [cdata, setCdata] = useState([]);
+  const [binfo, setBinfo] = useState([]);
+  const [cinfo, setCenfo] = useState([]);
+  const [lecs, setLecs] = useState([]);
   const router = new useRouter();
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
    // getcourses();
+   getEnrolled();
   }, []);
   const getcourses = () => {
     const requestOptions = {
@@ -42,6 +48,7 @@ export default function Reports() {
 
 
   const getEnrolled = () => {
+    
     const requestOptions = {
       method: "GET",
       headers: {
@@ -49,12 +56,35 @@ export default function Reports() {
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/batches/`+NURL.get("bid")+"?populate=course", requestOptions)
+    fetch(`${API_URL}/subscriptions?[filters][user][id]=`+cookies.get("login").user.id
+    , requestOptions)
       .then((response) => response.json())
       .then((data) => {
-       
-     console.log("object", data);
-     setCdata(data.data.attributes);
+   
+     getbatch(data.data[0].attributes.bill.bid)
+     console.log("aasaxxcc",data)
+    setBinfo(data.data[0].attributes.bill.cname)
+   
+      });
+  };
+
+
+  
+  const getbatch = (bid) => {
+    console.log("id",bid)
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+      },
+    };
+    fetch(`${API_URL}/batches/`+bid+"?populate=*"
+    , requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+    setLecs(data.data.attributes.lectures.lecs);
+    setCenfo(data.data.attributes.course.data.attributes.name);
    
       });
   };
@@ -71,40 +101,55 @@ export default function Reports() {
         x-data
         x-init="$el.focus()"
       >
-        <div
-          class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              textAlign: "center",
-              padding: 20,
-              backgroundColor: "white",
-              borderRadius: 10,
-            }}
-          >
-            {/* <Image
-      src= {im}
-      width={200}
-      height={200}
-      alt="Picture of the author"
-    /> */}
+        
 
-            <h1 style={{ font: "30px", color: "grey", fontWeight: "bold" }}>
-              {" "}
-              No Course Selected{" "}
-            </h1>
+<div style={{display:"flex",width:"100%",padding:20}} id="dash">
+<div style={{display:"flex",flexDirection:"column",color:"#6E6E6E", height:"100%",width:"100%",backgroundColor:"white",padding:20}} id="dashin">
 
-            <h3 style={{ font: "20px", color: "black" }}>
-              {" "}
-              Select from the available courses to start learning
-            </h3>
+<div>
+  <h1 style={{fontSize:20,fontWeight:"bold"}} >Upcoming lectures:</h1>
+</div>
+
+<div style={{marginTop:20}}>
+  <div><span>{cinfo&&cinfo } </span> - <span>{binfo&&binfo  } batch </span> </div>
+ 
+
+
+
+
+ <div style={{padding:20}}>
+
+
+
+
+    {lecs.map((item, index) => (
+          <div style={{display:'flex',alignItems:"center",justifyContent:"space-between",padding:5,borderBottom:"0.5px solid black"}}>
+           <div> {item.title}</div>
+           <div> {item.medium}</div>
+           <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
+           <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
+          {item.link.length==0?"No link updated":item.link}
+           
+          <div style={{fontWeight:'bold'}}> {item.status} </div>
           </div>
-        </div>
+
+          
+          ))}
+
+
+
+ </div>
+
+</div>
+
+  
+
+</div>
+
+  
+</div>
+
+
         <div style={{ margin: 30 }}>
           <hr />
         </div>

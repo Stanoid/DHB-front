@@ -1,5 +1,6 @@
 "use client";
 
+const cookies = new Cookies();
 import RootLayout from "@/layout/layout";
 import { MainContext } from "../context/context";
 import { useContext,useEffect } from "react";
@@ -15,12 +16,13 @@ import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo,FaArrowCircleRi
 import Policie from "./policies.js"
 import Print from "./print";
 import Testelement from "./Testelement";
+import { useRouter } from 'next/navigation';
 import Playercomp from "./player";
 import Cookies from "universal-cookie";
 import EnglishTest from "./EnglishTest";
 
 export default function Enrollment() {
-
+  const router = useRouter()
   const cookies = new Cookies();
   const NURL = useSearchParams()
   const { message, setMessage, login, isLogged } = useContext(MainContext);
@@ -33,6 +35,7 @@ export default function Enrollment() {
   const [namever, setnameVer] = useState(false);
   const [emailver, setemailVer] = useState(false);
   const [name, setname] = useState(cookies.get("login").user.username);
+  const [id, setid] = useState(cookies.get("login").user.id);
   const [email, setemail] = useState(cookies.get("login").user.email);
   const [test, setTest] = useState([]);
   const [results, setResults] = useState(0);
@@ -54,17 +57,53 @@ export default function Enrollment() {
 
   const signUpFunc =()=>{
 
-    console.table({
-      "Ttest":Ttest,
-      "Ptest": Ptest,
-      "Ptest_re":Ptestresults,
-      "Ttest_re":Ttestresults,
-    })
     
+
+    console.log("batchid",cdata );
+    
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+      },
+      body: JSON.stringify({
+        data: {
+          user: id,
+          batches: cdata.id,
+          
+          bill: {
+            "id":cdata&&cdata.attributes.course.data.id,
+          "bid":cdata.id,
+            "bname":cdata&&cdata.attributes.course.data.attributes.name,
+          "cname": cdata&&cdata.attributes.name,
+          "price": cdata&&cdata.attributes.course.data.attributes.price},
+          scores: {
+            "Ttest":Ttest,
+            "Ptest": Ptest,
+            "Ptest_re":Ptestresults,
+            "Ttest_re":Ttestresults,
+          },
+        },
+      }),
+    };
+
+    fetch(`${API_URL}/subscriptions`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        router.push("/dashboard")
+      });
+
+   
+
   
     
 
   }
+
+
 
 
   const appendAnswer = (data,state)=>{
@@ -167,7 +206,7 @@ signUpFunc()
       setpage(page+1)
     }
     
-    
+
 
 
 
@@ -272,12 +311,12 @@ setResults(score);
         Authorization: "Bearer " + cookies.get("login").jwt,
       },
     };
-    fetch(`${API_URL}/batches/`+NURL.get("bid")+"?populate=course", requestOptions)
+    fetch(`${API_URL}/batches/`+NURL.get("bid")+"?populate=*", requestOptions)
       .then((response) => response.json())
       .then((data) => {
        
      console.log("object", data);
-     setCdata(data.data.attributes);
+     setCdata(data.data);
      getTest()
       });
   };
@@ -362,8 +401,8 @@ setResults(score);
 
 
   <div style={{fontSize:30}}>
-<h1> Enrolling to <span style={{fontWeight:"bold"}}>{cdata&&cdata.name}
-</span>  batch of  <span style={{fontWeight:"bold"}}> {cdata&&cdata.course.data.attributes.name} </span></h1>
+<h1> Enrolling to <span style={{fontWeight:"bold"}}>{cdata&&cdata.attributes.name}
+</span>  batch of  <span style={{fontWeight:"bold"}}> {cdata&&cdata.attributes.course.data.attributes.name} </span></h1>
 </div>
 <div style={{marginTop:20}}>
 <ol  style={{display:"flex",flexDirection:"row",fontSize:20}} class="items-center  space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
@@ -555,9 +594,10 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 <div style={{display: page==7?"flex":"none",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%"}}>
 <Print data={
   {
-    "bname":cdata&&cdata.course.data.attributes.name,
-    "cname": cdata&&cdata.name,
-    "price": cdata&&cdata.course.data.attributes.price
+    
+    "bname":cdata&&cdata.attributes.course.data.attributes.name,
+    "cname": cdata&&cdata.attributes.name,
+    "price": cdata&&cdata.attributes.course.data.attributes.price
   }
 }/>
 </div>

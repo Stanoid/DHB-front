@@ -44,7 +44,7 @@ const cookies = new Cookies();
   
   const isLogged = (pageRole)=>{
    
-      console.log(cookies.get("login"));
+    //  console.log(cookies.get("login"));
       
        
               

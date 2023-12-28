@@ -77,7 +77,7 @@ export default function Reports() {
 
 
 <Floating/>
-<CenteredDiv text={"NEBOSH International General Certificate "} img={bg.src}/>
+<CenteredDiv text={"NEBOSH ENVIRONMENT MANAGEMENT CERTIFICATE (NEBOSH EMC) "} img={bg.src}/>
 
 
     
