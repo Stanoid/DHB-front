@@ -123,14 +123,20 @@ export default function Reports() {
 
 
     {lecs.map((item, index) => (
-          <div style={{display:'flex',alignItems:"center",justifyContent:"space-between",padding:5,borderBottom:"0.5px solid black"}}>
-           <div> {item.title}</div>
-           <div> {item.medium}</div>
+          <div style={{display:'flex',textAlign:"left",alignItems:"center",justifyContent:"space-between",padding:10,borderBottom:"0.5px solid black"}}>
+          
+          <div style={{display:"flex",width:30,height:30,justifyContent:"center",textAlign:"left",alignItems:"center",backgroundColor:"#0040FF",color:"white",fontWeight:"bold",borderRadius:100}}>{index+1}</div> 
+           <div style={{fontWeight:"bold",display:"flex",justifyContent:'flex-start',alignItems:"center",textAlign:"left",maxWidth:200}}> 
+         <p style={{textAlign:"left"}}> 
+           {item.title}
+         </p>
+           </div>
+        
            <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
-           <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
-          {item.link.length==0?"No link updated":item.link}
+        
+          {item.status==1?"No link updated": <div style={{backgroundColor:"#0040FF",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}><a href={item.link}> JOIN LECTURE </a></div>}
            
-          <div style={{fontWeight:'bold'}}> {item.status} </div>
+          
           </div>
 
           
