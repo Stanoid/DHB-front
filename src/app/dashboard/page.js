@@ -63,9 +63,13 @@ export default function Reports() {
     , requestOptions)
       .then((response) => response.json())
       .then((data) => {
+        console.log("aasaxxcc",data)
+        if(data.data.length==0){
+          return
+        }
    setBid(data.data[0].attributes.bill.bid)
      getbatch();
-     console.log("aasaxxcc",data)
+   
     setBinfo(data.data[0].attributes.bill.cname)
    
       });
@@ -110,7 +114,7 @@ export default function Reports() {
         
 
 <div style={{display:"flex",width:"100%",padding:20}} id="dash">
-<div style={{display:"flex",flexDirection:"column",color:"#6E6E6E", height:"100%",width:"100%",backgroundColor:"white",padding:20}} id="dashin">
+<div style={{display:binfo.length==0?"none":"flex",flexDirection:"column",color:"#6E6E6E", height:"100%",width:"100%",backgroundColor:"white",padding:20}} id="dashin">
 
 <div>
   <h1 style={{fontSize:20,fontWeight:"bold"}} >Upcoming lectures:</h1>

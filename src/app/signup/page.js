@@ -1954,7 +1954,7 @@ console.log(requestOptions);
         if(data.jwt){
 
           const cookies = new Cookies();
-          cookies.set('login', data.jwt, { path: '/' });
+          cookies.set('login', data, { path: '/' });
        
       router.replace("/dashboard")
   
