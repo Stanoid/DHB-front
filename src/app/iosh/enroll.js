@@ -166,8 +166,10 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 <Link href={{ pathname: '/enrollment', query: { id: props.id,bid:item.id } }}>
   
 <div style={{textAlign:"center",marginTop:10,cursor:"pointer"}}>
-<div  style={{display:"flex",justifyContent:"center",alignItems:"center"}} class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
-rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"> <FaArrowCircleRight/> <span style={{marginLeft:10}}>ENROLL</span>  </div>
+<div  style={{display:"flex",justifyContent:"center",alignItems:"center"}} class="w-full px-4 py-2 text-sm text-white font-medium
+ text-white bg-blue-500 border border-gray-300 
+rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"> 
+<FaArrowCircleRight/> <span style={{marginLeft:10}}>ENROLL</span>  </div>
 </div>
   </Link>
 

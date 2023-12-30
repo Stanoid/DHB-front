@@ -8,8 +8,10 @@ import { Center, Flex } from "@mantine/core";
 import { API_URL } from "../../../utils/url";
 import Image from "next/image";
 import iosh from "./img/iosh.jpg";
+import Link from "next/link";
 import { useState } from "react";
 import emc from "./img/emc.jpg";
+
 import { useRouter } from "next/navigation";
 import ig from "./img/ig.jpg";
 import Course from "./cunit";
@@ -21,6 +23,7 @@ export default function Reports() {
 
   const [cdata, setCdata] = useState([]);
   const [binfo, setBinfo] = useState([]);
+  const [bid, setBid] = useState([]);
   const [cinfo, setCenfo] = useState([]);
   const [lecs, setLecs] = useState([]);
   const router = new useRouter();
@@ -60,8 +63,8 @@ export default function Reports() {
     , requestOptions)
       .then((response) => response.json())
       .then((data) => {
-   
-     getbatch(data.data[0].attributes.bill.bid)
+   setBid(data.data[0].attributes.bill.bid)
+     getbatch();
      console.log("aasaxxcc",data)
     setBinfo(data.data[0].attributes.bill.cname)
    
@@ -70,8 +73,8 @@ export default function Reports() {
 
 
   
-  const getbatch = (bid) => {
-    console.log("id",bid)
+  const getbatch = () => {
+    console.log("batch id",bid)
     const requestOptions = {
       method: "GET",
       headers: {
@@ -83,8 +86,11 @@ export default function Reports() {
     , requestOptions)
       .then((response) => response.json())
       .then((data) => {
-    setLecs(data.data.attributes.lectures.lecs);
-    setCenfo(data.data.attributes.course.data.attributes.name);
+        console.log("ssssdd batch data",data.data)
+
+    setLecs(data.data[0].attributes.lectures.lecs);
+    console.log("batch state",lecs)
+    setCenfo(data.data[0].attributes.course.data.attributes.name);
    
       });
   };
@@ -134,7 +140,19 @@ export default function Reports() {
         
            <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
         
-          {item.status==1?"No link updated": <div style={{backgroundColor:"#0040FF",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}><a href={item.link}> JOIN LECTURE </a></div>}
+          {item.status==1?"No link updated":
+          
+          
+
+<Link href={{ pathname: '/lec', query: { bid: bid,lid:index,linkv:item.link,title:item.title,testid:item.testid }}}>
+<div  style={{backgroundColor:"#0040FF",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}
+          
+          >
+
+             JOIN LECTURE </div>  
+
+  </Link>
+         }
            
           
           </div>
