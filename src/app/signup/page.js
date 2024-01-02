@@ -1930,7 +1930,7 @@ console.log(message)
         {
      name: name ,  
     username: email,
-    type:3,
+    type:4,
     email: email,
     phone:mob,
     gender:gender,

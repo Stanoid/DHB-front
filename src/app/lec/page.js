@@ -61,6 +61,48 @@ export default function Reports() {
 
 
 
+  const attendlec = () => {
+
+    let lec = [];
+
+
+    console.log("binfo",lecs[NURL.get("lid")])
+let oldatt =  lecs[NURL.get("lid")].attendence;
+console.log("attendence",oldatt);
+lecs[NURL.get("lid")].attendence = oldatt.push({"id":cookies.get("login").user.id,"prescore":Ttestresults})
+// console.log("new att",oldatt)
+// let oldcdata = cdata;
+// console.log("cdata",oldcdata.attributes.lectures.lecs[NURL.get("lid")].attendence )
+
+
+
+    // const requestOptions = {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: "Bearer " + cookies.get("login").jwt,
+    //   },
+    // };
+    // fetch(`${API_URL}/batch/`+NURL.get("bid"), requestOptions)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+       
+    // console.log("attend lecture function",data)
+    
+    //   });
+
+
+
+
+      return;
+  };
+
+
+
+  
+
+  
+
   const getTechnicalTest = () => {
     const requestOptions = {
       method: "GET",
@@ -78,9 +120,6 @@ export default function Reports() {
       });
   };
 
-
-
-  
 
 
 
@@ -130,6 +169,7 @@ export default function Reports() {
 
 
       const checktechnicaltest = ()=>{
+
         let score = 0;
       for (let i = 0; i < Ttestresults.data.length; i++) {
       if(Ttestresults.data[i].check ==1){
@@ -138,9 +178,13 @@ export default function Reports() {
       
       console.log(score+" out of "+ Ttest.length);
       setResults(score);
+         
+      
+      
+         attendlec();
+         return;
          setttCheat(true); 
-      
-      
+        
       
         }
 
@@ -163,7 +207,7 @@ export default function Reports() {
     setLecs(data.data.attributes.lectures.lecs);
     setCenfo(data.data.attributes.course.data.attributes.name);
     setBinfo(data.data.attributes.name);
-   
+   setCdata(data.data)
       });
   };
 

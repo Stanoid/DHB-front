@@ -3,11 +3,12 @@ import './globals.css'
 import {React} from 'react'
 import Link from 'next/link';
 import Footer from './footer';
+import Cookies from 'universal-cookie';
 import { useRouter,usePathname } from 'next/navigation';
 
 
 export default function RootLayout({ children }) {
-
+  const cookies = new Cookies();
   const pathname = usePathname()
   
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
                 class="group flex items-center px-2 py-2 text-sm leading-5 font-medium text-white rounded-md focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
                 style={{backgroundColor:pathname==="/dashboard"?"#212020":""}}
               >
+              
                 <svg
                   class="mr-3 h-6 w-6 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                   stroke="currentColor"
@@ -76,7 +78,8 @@ export default function RootLayout({ children }) {
               <a
                 href="/resorces"
                 class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-              >
+            style={{display: cookies.get("login").user.type==3?"block":"none"}}
+            >
                 <svg
                   class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                   stroke="currentColor"
@@ -96,7 +99,8 @@ export default function RootLayout({ children }) {
               <a
                 href="/courses"
                 class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-              >
+                style={{display: cookies.get("login").user.type==3?"block":"none"}}
+             >
                 <svg
                   class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                   stroke="currentColor"
@@ -115,6 +119,7 @@ export default function RootLayout({ children }) {
               <a
                 href="/reports"
                 class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
+                style={{display: cookies.get("login").user.type==3?"block":"none"}}
               >
                 <svg
                   class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
@@ -133,6 +138,7 @@ export default function RootLayout({ children }) {
               </a>
 
               <a
+               style={{display: cookies.get("login").user.type==3?"block":"none"}}
                 href="/tests"
                 class="mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
               >
