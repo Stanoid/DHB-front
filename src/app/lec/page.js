@@ -89,7 +89,7 @@ export default function Reports() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + cookies.get("login").jwt,
+        "Authorization": "Bearer " + cookies.get("login").jwt,
         body: JSON.stringify(
           {
        attendence: lec ,  
