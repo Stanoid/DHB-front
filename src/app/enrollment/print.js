@@ -21,12 +21,12 @@ const Print = (props) => {
     <div class="flex flex-col gap-3 border-b py-6 text-xs">
       <p class="flex justify-between">
         <span class="text-gray-400">Receipt No.:</span>
-        <span>#5033</span>
+        <span>#{props.data.rid}</span>
       </p>
      
       <p class="flex justify-between">
         <span class="text-gray-400">Name:</span>
-        <span>Hassan Babiker</span>
+        <span>{props.data.name}</span>
       </p>
     
     </div>

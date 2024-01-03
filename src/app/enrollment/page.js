@@ -34,7 +34,7 @@ export default function Enrollment() {
   const [read, setread] = useState(false);
   const [namever, setnameVer] = useState(false);
   const [emailver, setemailVer] = useState(false);
-  const [name, setname] = useState(cookies.get("login").user.username);
+  const [name, setname] = useState(cookies.get("login").user.name);
   const [id, setid] = useState(cookies.get("login").user.id);
   const [email, setemail] = useState(cookies.get("login").user.email);
   const [test, setTest] = useState([]);
@@ -594,7 +594,11 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 <div style={{display: page==7?"flex":"none",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%"}}>
 <Print data={
   {
+
+    "id":cdata&&cdata.attributes.course.data.id,
     
+    "name":cookies.get("login").user.name&&cookies.get("login").user.name, 
+    "rid": cookies.get("login").user&&cookies.get("login").user.id + "1123" ,
     "bname":cdata&&cdata.attributes.course.data.attributes.name,
     "cname": cdata&&cdata.attributes.name,
     "price": cdata&&cdata.attributes.course.data.attributes.price

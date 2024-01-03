@@ -223,7 +223,7 @@ content={
  data={{
   "name":"NEBOSH IG",
  "price":"500 USD",
- "duration":"22 days",
+ "duration":"14 days",
  "lang":"English  ",
  "level":"Basic / Level3",
  "board":"NEBOSH",

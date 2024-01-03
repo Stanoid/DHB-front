@@ -196,7 +196,7 @@ export default function Reports() {
 
  
 
-<Course getData={()=>{router.push("/neboshig")}} data={{"price":"500 USD","duration":"3 Days","board":"NEBOSH","url":"/neboshig"}} title={"Nebosh IG"} img={ig} />
+<Course getData={()=>{router.push("/neboshig")}} data={{"price":"500 USD","duration":"14 Days","board":"NEBOSH","url":"/neboshig"}} title={"Nebosh IG"} img={ig} />
 
           {/* {cdata.map((item, index) => (
             <Course
