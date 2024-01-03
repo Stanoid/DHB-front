@@ -60,46 +60,53 @@ export default function Reports() {
  
 
 
-
   const attendlec = () => {
-
-    let lec = [];
-
-
-    console.log("binfo",lecs[NURL.get("lid")])
-let oldatt =  lecs[NURL.get("lid")].attendence;
-console.log("attendence",oldatt);
-lecs[NURL.get("lid")].attendence = oldatt.push({"id":cookies.get("login").user.id,"prescore":Ttestresults})
-// console.log("new att",oldatt)
-// let oldcdata = cdata;
-// console.log("cdata",oldcdata.attributes.lectures.lecs[NURL.get("lid")].attendence )
-
-
-
-    // const requestOptions = {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: "Bearer " + cookies.get("login").jwt,
-    //   },
-    // };
-    // fetch(`${API_URL}/batch/`+NURL.get("bid"), requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+      },
+    };
+    fetch(`${API_URL}/batches/`+NURL.get("bid"), requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
        
-    // console.log("attend lecture function",data)
-    
-    //   });
+        console.log("object", data.data.attributes.attendence);
+        let lec = data.data.attributes.attendence;
+        lec.data.push=({id:cookies.get("login").user.id,score:Ttestresults});
 
+        actat(lec);
 
-
-
-      return;
+      });
   };
 
 
 
   
+  const actat = (lec) => {
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+        body: JSON.stringify(
+          {
+       attendence: lec ,  
+    
+            }
+        )
+      },
+    };
+    fetch(`${API_URL}/batches/`+NURL.get("bid"), requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+       
+      console.log(data);
+
+      });
+  };
+
 
   
 
@@ -181,8 +188,8 @@ lecs[NURL.get("lid")].attendence = oldatt.push({"id":cookies.get("login").user.i
          
       
       
-        // attendlec();
-        
+         attendlec();
+        return;
          setttCheat(true); 
         
       
