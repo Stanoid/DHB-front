@@ -92,22 +92,19 @@ export default function Reports() {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + cookies.get("login").jwt,
-      
-        body: JSON.stringify({
-          'data': {
-            'name': lec            
-          }
-        })
-   
       },
+      body: JSON.stringify({"data":{
+        attendence:lec
+      
+      }})
     };
 
     console.log(requestOptions);
     fetch(`${API_URL}/batches/${NURL.get("bid")}`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-       console.log("aaa",lec)
-      alert(JSON.stringify(data));
+       console.log("aaa",data)
+    
 
       });
   };
