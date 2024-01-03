@@ -74,7 +74,7 @@ export default function Reports() {
        
         console.log("object", data.data.attributes.attendence);
         let lec = data.data.attributes.attendence;
-        lec.data.push=({id:cookies.get("login").user.id,score:Ttestresults});
+        lec.data.push({id:cookies.get("login").user.id,score:Ttestresults});
 
         actat(lec);
 
@@ -85,23 +85,24 @@ export default function Reports() {
 
   
   const actat = (lec) => {
+
+
     const requestOptions = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + cookies.get("login").jwt,
-        body: JSON.stringify({
-          "data":{
-            attendence : lec,
+      
+        body:{
+          name:"a"
+       }
    
-          }
-       })
       },
     };
-    fetch(`${API_URL}/batches/`+NURL.get("bid"), requestOptions)
+    fetch(`${API_URL}/batches/${NURL.get("bid")}`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-       
+       console.log("aaa",lec)
       console.log(data);
 
       });

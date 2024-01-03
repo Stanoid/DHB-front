@@ -1,16 +1,19 @@
-/** @type {import('next').NextConfig} */
+
+
 module.exports = {
-    headers: {
-      'Access-Control-Allow-Origin': ['https://dhback-8b00e5257b7f.herokuapp.com'],
-      'Access-Control-Allow-Methods': ['GET', 'POST', 'PUT', 'DELETE']
-    },
-    async rewrites() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: 'https://dhback-8b00e5257b7f.herokuapp.com/:path*',
-        },
-      ]
-    },
-  };
+
+  reactStrictMode: true,
+  images: {
+    domains: ["https://dhback-8b00e5257b7f.herokuapp.com/","192.168.43.110","res.cloudinary.com","http://localhost:3000"],
+  },
+  
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+
+    return config;
+  }
+}
 

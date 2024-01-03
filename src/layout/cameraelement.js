@@ -117,7 +117,7 @@ import React from 'react'
 
 function App() {
   return (
-    <div>Camera Module</div>
+    <div>Press next to coutinue</div>
   )
 }
 
