@@ -107,7 +107,7 @@ export default function Reports() {
       .then((response) => response.json())
       .then((data) => {
        console.log("aaa",lec)
-      console.log(data);
+      alert(JSON.stringify(data));
 
       });
   };
