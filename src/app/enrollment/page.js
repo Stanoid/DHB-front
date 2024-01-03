@@ -43,6 +43,7 @@ export default function Enrollment() {
   const [Ttest, setTTest] = useState([]);
   const [Ttestresults, setTTestresults] = useState({data:[]});
   const [Ptest, setPTest] = useState([]);
+  const [VPtest, setVPTest] = useState([]);
   const [Ptestresults, setPTestresults] = useState({data:[]});
   const [Pcheat, settPCheat] = useState(false);
   
@@ -340,6 +341,24 @@ setResults(score);
       });
   };
 
+  const getvidTest = () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookies.get("login").jwt,
+      },
+    };
+    fetch(`${API_URL}/tests/`+59, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+       
+     console.log(" vid test", data.data.attributes.object);
+     setVPTest(data.data.attributes.object);
+    
+      });
+  };
+
   
   const getTechnicalTest = () => {
     const requestOptions = {
@@ -355,6 +374,7 @@ setResults(score);
        
      console.log("test", data.data.attributes.object);
      setTTest(data.data.attributes.object);
+     getvidTest();
       });
   };
 
@@ -634,7 +654,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
     Watch the video and answer the following questions:
   </div>
 
-  {Ptest.map((item, index) => (
+  {VPtest.map((item, index) => (
 
 <Testelement checkTest={(data)=>{
    appendAnswerP(data,Ptestresults);

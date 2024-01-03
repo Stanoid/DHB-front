@@ -90,12 +90,12 @@ export default function Reports() {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + cookies.get("login").jwt,
-        "body": JSON.stringify(
-          {
-       attendence: lec ,  
-    
-            }
-        )
+        body: JSON.stringify({
+          "data":{
+            attendence : lec,
+   
+          }
+       })
       },
     };
     fetch(`${API_URL}/batches/`+NURL.get("bid"), requestOptions)
