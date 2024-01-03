@@ -42,7 +42,7 @@ getcourses();
     <div style={{height:250,overflow:"scroll",fontSize:15}} id="yo">
 
         
-        <Markdown>{cdata&&cdata}</Markdown>
+      <p style={{textAlign:"justify"}}>{cdata&&cdata}</p>
     </div>
   )
 

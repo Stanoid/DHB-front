@@ -23,6 +23,7 @@ export default function Reports() {
   const { message, setMessage, login, isLogged } = useContext(MainContext);
   const NURL = useSearchParams()
   const [cdata, setCdata] = useState([]);
+  const [attd, setAttd] = useState(0);
   const [binfo, setBinfo] = useState([]);
   const [cinfo, setCenfo] = useState([]);
   const [lecs, setLecs] = useState([]);
@@ -74,7 +75,7 @@ export default function Reports() {
        
         console.log("object", data.data.attributes.attendence);
         let lec = data.data.attributes.attendence;
-        lec.data.push({id:cookies.get("login").user.id,score:Ttestresults});
+        lec.data.push({id:cookies.get("login").user.id,testid:NURL.get("testid"),score:Ttestresults});
 
         actat(lec);
 
@@ -104,7 +105,7 @@ export default function Reports() {
       .then((response) => response.json())
       .then((data) => {
        console.log("aaa",data)
-    
+       setttCheat(true); 
 
       });
   };
@@ -191,8 +192,8 @@ export default function Reports() {
       
       
          attendlec();
-        return;
-         setttCheat(true); 
+       
+         
         
       
         }
@@ -212,11 +213,25 @@ export default function Reports() {
     , requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log("ob",data)
+
     setLecs(data.data.attributes.lectures.lecs);
     setCenfo(data.data.attributes.course.data.attributes.name);
     setBinfo(data.data.attributes.name);
    setCdata(data.data)
+   console.log("aaasdd",data)
+if(data.data){
+  for (let i = 0; i < data.data.attributes.attendence.data.length; i++) {
+
+    if(data.data.attributes.attendence.data[i].id==cookies.get("login").user.id){
+      setAttd(1);
+      console.log("aaa")
+      setttCheat(1)
+    }
+  }
+}
+ 
+
+   
       });
   };
 
@@ -250,19 +265,28 @@ export default function Reports() {
 
 
  <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:10,width:"100%"}}>
-{Ttest&&Ttest.map((item, index) => (
+ 
+<div style={{display:attd?"flex":"none",alignItems:"center",justifyContent:"center"}}>
+  Quiz done 
+  </div>
+  <div  style={{display:attd==1?"none":"block"}}>
+    {
+     Ttest&&Ttest.map((item, index) => (
 
-<Testelement checkTest={(data)=>{
-   appendAnswer(data,Ttestresults);
-}}  cheat={tcheat} no={index+1} ob = {item}/>
-       
-      ))}
+      <Testelement checkTest={(data)=>{
+         appendAnswer(data,Ttestresults);
+      }}  cheat={tcheat} no={index+1} ob = {item}/>
+             
+            ))
+    }
+  </div>
 
 
 <div>
   
 </div>
-      <div style={{display:tcheat?"flex":"none",flexDirection:"column",justifyContent:"center",
+<div style={{display:attd==0?"block":"none"}}>
+<div style={{display:tcheat?"flex":"none",flexDirection:"column",justifyContent:"center",
       alignItems:"center",backgroundColor:"rgba(0,255,0,0.6)",
        color:"white",fontSize:25,fontWeight:"bold",
       padding:20,borderRadius:10}}>
@@ -275,6 +299,8 @@ export default function Reports() {
         </div>
        
       </div>
+</div>
+     
 
 
 <div style={{display:tcheat?"none":"block",textAlign:"center",margin:20,cursor:"pointer"}}>
