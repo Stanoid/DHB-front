@@ -181,8 +181,8 @@ lecs[NURL.get("lid")].attendence = oldatt.push({"id":cookies.get("login").user.i
          
       
       
-         attendlec();
-         return;
+        // attendlec();
+        
          setttCheat(true); 
         
       
