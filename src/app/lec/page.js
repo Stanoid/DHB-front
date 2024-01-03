@@ -90,7 +90,7 @@ export default function Reports() {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + cookies.get("login").jwt,
-        body: JSON.stringify(
+        "body": JSON.stringify(
           {
        attendence: lec ,  
     
