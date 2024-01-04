@@ -106,29 +106,8 @@ export default function Reports() {
 </div>
 
 
-
 <div style={{padding:10}}>
-<Citem 
-content={<Accord f1={"Managing health and saftey"} f2={
-  <div>
-    <li>Why we should manage workplace health and safety.</li>
-    <li>How health and safety management systems work and what they look like</li>
-    <li>Managing risk  understanding people and processes.</li>
-    <li>Health and safety monitoring and measuring.</li>
-  </div>
-} s1={"Risk Assessment"} s2={
-
-  <div>
-  
-  <li>Physical and psychological health.</li>
-  <li>Musculoskeletal health.</li>
-  <li>Chemical and biological agents.</li>
-  <li>General workplace issues.</li>
-  <li>Work equipment.</li>
-  <li>Fire</li>
-  <li>Electricity</li>
-
-<div className="w-full" style={{display:"flex",alignItems:"flex-start",justifyContent:"center",padding:15}}>
+<Citem content={<div className="w-full" style={{display:"flex",alignItems:"flex-start",justifyContent:"center",padding:15}}>
 <div className="w-1/2">
   <div style={{color:"red",fontSize:20,fontWeight:"bold",padding:10}} >
   NEBOSH IG1 <br/>
@@ -160,7 +139,33 @@ immediately useful and valuable.
 
 
 
+</div>}
+ title={"EXAMINATION MODE"}  icon={FaCheckCircle} />
 </div>
+
+
+<div style={{padding:10}}>
+<Citem 
+content={<Accord f1={"Managing health and saftey"} f2={
+  <div>
+    <li>Why we should manage workplace health and safety.</li>
+    <li>How health and safety management systems work and what they look like</li>
+    <li>Managing risk  understanding people and processes.</li>
+    <li>Health and safety monitoring and measuring.</li>
+  </div>
+} s1={"Risk Assessment"} s2={
+
+  <div>
+  
+  <li>Physical and psychological health.</li>
+  <li>Musculoskeletal health.</li>
+  <li>Chemical and biological agents.</li>
+  <li>General workplace issues.</li>
+  <li>Work equipment.</li>
+  <li>Fire</li>
+  <li>Electricity</li>
+
+
 
 </div>
 

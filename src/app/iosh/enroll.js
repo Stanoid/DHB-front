@@ -17,8 +17,8 @@ function Enroll(props) {
 
   return (
 
-<div className='w-full' style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
-   <div className='w-full' style={{display:"flex",alignItems:"flex-start",justifyContent:"center"}}>
+<div className='sm:w-full lg:w-1/2 md:w-1/2' style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
+   <div className='sm:w-full lg:w-1/2 md:w-1/2' style={{display:"flex",alignItems:"flex-start",justifyContent:"center"}}>
     <div className='   w-1/2' style={{display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column"}}>
    
     <div style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"center",marginTop:5}}>
