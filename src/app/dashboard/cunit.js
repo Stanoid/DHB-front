@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Enroll from '../iosh/enroll'
 function Course(props) {
   return (
-    <div style={{backgroundColor:"white",display:"flex",flexDirection:"column",borderRadius:10,width:"auto",color:"black",padding:15}}>
+    <div style={{backgroundColor:"white",display:"flex",flexDirection:"column",borderRadius:10,marginTop:15,width:"auto",color:"black",padding:15}}>
      <Image
       src= {props.img}
       width={300}

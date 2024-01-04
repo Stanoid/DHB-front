@@ -195,7 +195,7 @@ export default function Reports() {
         </div>
 
         <div
-        className="sm:flex-col lg:flex-row md:flex-row"
+        className="sm:flex-col flex-col lg:flex-row md:flex-row"
           style={{
             display: "flex",
             justifyContent: "space-around",
@@ -204,22 +204,9 @@ export default function Reports() {
         >
           
 <Course getData={()=>{router.push("/iosh")}}  data={{"price":"150 USD","duration":"3 Days","board":"IOSH","url":"/iosh"}}  title={"IOSH Managing safely"} img={iosh} />
-
 <Course getData={()=>{router.push("/neboshemc")}} data={{"price":"500 USD","duration":"5 Days","board":"NEBOSH","url":"/neboshemc"}} title={"NEBOSH ENVIRONMENT MANAGEMENT CERTIFICATE (NEBOSH EMC)"} img={emc} />
-
- 
-
 <Course getData={()=>{router.push("/neboshig")}} data={{"price":"500 USD","duration":"14 Days","board":"NEBOSH","url":"/neboshig"}} title={"Nebosh IG"} img={ig} />
 
-          {/* {cdata.map((item, index) => (
-            <Course
-              getData={() => {
-                getcourseData();
-              }}
-              title={item.attributes.name}
-              img={imgsn}
-            />
-          ))} */}
         </div>
 
         <div  class="max-w-7xl h-32 mx-auto text-gray-600 py-2 px-4 sm:px-6 md:px-8"></div>
