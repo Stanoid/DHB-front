@@ -144,7 +144,7 @@ export default function Reports() {
         
            <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
         
-          {item.status==1?"No link updated":
+          {item.status==1?"-":
           
           
 
