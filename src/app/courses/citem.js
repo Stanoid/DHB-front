@@ -4,7 +4,7 @@ function citem(props) {
 
     <>
     <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-<div className="w-2/12" style={{display:"flex",alignContent:"center",justifyContent:"center"}}>
+<div className="w-2/12 " style={{display:"flex",alignContent:"center",justifyContent:"center"}}>
    <div className='' style={{padding:15,fontSize:30,borderRadius:100,backgroundColor:"#81DBFF"}}>
     <props.icon  />
    </div>

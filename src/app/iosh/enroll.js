@@ -19,7 +19,7 @@ function Enroll(props) {
 
 <div className='w-full' style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
    <div className='w-full' style={{display:"flex",alignItems:"flex-start",justifyContent:"center"}}>
-    <div className='w-1/2' style={{display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column"}}>
+    <div className='   w-1/2' style={{display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column"}}>
    
     <div style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"center",marginTop:5}}>
        <div style={{display:"flex",alignItems:"center",alignItems:"center"}}><FaGraduationCap/> <div style={{marginLeft:5}} > Qualifications :</div> </div> 
@@ -99,7 +99,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 {
   props.short?
   <div></div>:        
-  <div style={{width:"100%",marginTop:40,borderRadius:5,backgroundColor:"white"}}  class="relative overflow-x-auto">
+  <div style={{width:"100vw",marginTop:40,borderRadius:5,backgroundColor:"white"}}  class="relative overflow-x-auto">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -109,9 +109,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
                   <th scope="col" class="px-6 py-3">
                       Start Date
                   </th>
-                  <th scope="col" class="px-6 py-3">
-                      Mode Of Study
-                  </th>
+                 
                   <th scope="col" class="px-6 py-3">
                       Exam Date
                   </th>
@@ -132,9 +130,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 <td class="px-6 py-4 text-gray-700">
    {item&&item.attributes.start}
 </td>
-<td class="px-6 py-4 text-gray-700">
-{item&&item.medium}
-</td>
+
 <td class="px-6 py-4 text-gray-700">
     {item&&item.attributes.end}
 </td>

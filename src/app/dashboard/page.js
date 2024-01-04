@@ -106,18 +106,18 @@ export default function Reports() {
   return (
     <RootLayout>
       <main
-        class="flex-1 relative z-0 overflow-y-auto py-6 focus:outline-none"
+        class="flex-1 relative z-0 overflow-y-auto  focus:outline-none"
         tabindex="0"
         x-data
         x-init="$el.focus()"
       >
         
 
-<div style={{display:"flex",width:"100%",padding:20}} id="dash">
+<div style={{display:"flex",width:"100%",padding:10}} id="dash">
 <div style={{display:binfo.length==0?"none":"flex",flexDirection:"column",color:"#6E6E6E", height:"100%",width:"100%",backgroundColor:"white",padding:20}} id="dashin">
 
 <div>
-  <h1 style={{fontSize:20,fontWeight:"bold"}} >Upcoming lectures:</h1>
+  <h1 className="text-3xl font-bold underline" style={{fontSize:20,fontWeight:"bold"}} >Upcoming lectures:</h1>
 </div>
 
 <div style={{marginTop:20}}>
@@ -127,38 +127,50 @@ export default function Reports() {
 
 
 
- <div style={{padding:20}}>
+ <div style={{marginTop:20}} className="sm:p-0 lg:p-5">
 
 
 
 
     {lecs.map((item, index) => (
-          <div style={{display:'flex',textAlign:"left",alignItems:"center",justifyContent:"space-between",padding:10,borderBottom:"0.5px solid black"}}>
+          <div style={{display:'flex',padding:"10px 0px",textAlign:"left",marginTop:10,alignItems:"flex-start",
+          justifyContent:"space-between",flexDirection:"row",borderBottom:"0.5px solid black"}}>
           
-          <div style={{display:"flex",width:30,height:30,justifyContent:"center",textAlign:"left",alignItems:"center",backgroundColor:"#0040FF",color:"white",fontWeight:"bold",borderRadius:100}}>{index+1}</div> 
-           <div style={{fontWeight:"bold",display:"flex",justifyContent:'flex-start',alignItems:"center",textAlign:"left",maxWidth:200}}> 
+       
+
+
+
+          
+           <div  style={{fontWeight:"bold",flexDirection:"row",display:"flex",justifyContent:'center',alignItems:"flex-start",textAlign:"left"}}> 
          <p style={{textAlign:"left"}}> 
-           {item.title}
+           {index+1} - {  item.title}
+
+           <br/>
+           <div style={{fontWeight:'bold',fontSize:15,padding:10}}> {item.date} At {item.time} </div>
          </p>
            </div>
+
+
+        <div style={{display:"flex",alignItems:"center", justifyContent:"center"}}>
+          
         
-           <div style={{fontWeight:'bold'}}> {item.date} At {item.time} </div>
-        
-          {item.status==1?"-":
+          {item.status==1?<div  style={{backgroundColor:"grey",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}
+          
+     > JOIN </div> :
           
           
 
 <Link href={{ pathname: '/lec', query: { bid: bid,lid:index,linkv:item.link,title:item.title,testid:item.testid }}}>
-<div  style={{backgroundColor:"#0040FF",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}
+<div   className="bg-blue-500" style={{padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}
           
           >
 
-             JOIN LECTURE </div>  
+             JOIN  </div>  
 
   </Link>
          }
            
-          
+          </div>
           </div>
 
           
@@ -190,9 +202,9 @@ export default function Reports() {
           }}
         >
           
-<Course getData={()=>{router.push("/iosh")}}  data={{"price":"150 USD","duration":"3 Days","board":"IOSH","url":"/iosh"}}  title={"IOSH Managing safely"} img={iosh} />
+{/* <Course getData={()=>{router.push("/iosh")}}  data={{"price":"150 USD","duration":"3 Days","board":"IOSH","url":"/iosh"}}  title={"IOSH Managing safely"} img={iosh} />
 
-<Course getData={()=>{router.push("/neboshemc")}} data={{"price":"500 USD","duration":"5 Days","board":"NEBOSH","url":"/neboshemc"}} title={"NEBOSH ENVIRONMENT MANAGEMENT CERTIFICATE (NEBOSH EMC)"} img={emc} />
+<Course getData={()=>{router.push("/neboshemc")}} data={{"price":"500 USD","duration":"5 Days","board":"NEBOSH","url":"/neboshemc"}} title={"NEBOSH ENVIRONMENT MANAGEMENT CERTIFICATE (NEBOSH EMC)"} img={emc} /> */}
 
  
 
@@ -209,7 +221,7 @@ export default function Reports() {
           ))} */}
         </div>
 
-        <div class="max-w-7xl mx-auto text-gray-600 py-2 px-4 sm:px-6 md:px-8"></div>
+        <div  class="max-w-7xl h-32 mx-auto text-gray-600 py-2 px-4 sm:px-6 md:px-8"></div>
       </main>
     </RootLayout>
   );

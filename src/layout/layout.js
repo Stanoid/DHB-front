@@ -38,7 +38,7 @@ useEffect(() => {
     >
       <div class="hidden md:flex md:flex-shrink-0">
         <div class="flex  flex-col w-64">
-          <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900" >
+          <div class="flex items-center h-16 flex-shrink-0  bg-gray-900" >
             {/* <img class="h-8 w-auto" src="/img/logos/workflow-logo-on-dark.svg" alt="Workflow" /> */}
           </div>
           <div  class="h-0 flex-1 flex flex-col overflow-y-auto" >
@@ -173,21 +173,7 @@ useEffect(() => {
       </div>
       <div class="flex flex-col w-0 flex-1 overflow-hidden">
         <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
-          <button class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden">
-            <svg
-              class="h-6 w-6"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </button>
+         <div style={{color:"gray",display:"flex",justifyContent:"center",alignItems:"center",padding:10,fontWeight:"bold",fontSize:25}}>DHB</div>
           <div class="flex-1 px-4 flex justify-between">
             <div class="flex-1 flex">
               <div class="w-full flex md:ml-0">

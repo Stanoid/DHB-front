@@ -76,7 +76,7 @@ export default function Reports() {
       >
 
 
-<Floating/>
+
 <CenteredDiv text={"NEBOSH International General Certificate "} img={bg.src}/>
 
 
@@ -84,30 +84,30 @@ export default function Reports() {
 
     <br/><br/>
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+<div style={{padding:10}}>
 <Citem content={"This qualification was created for multinational organizations working in various industries that adhere to worldwide standardsor guidelines while also meetinglocal demands. The qualification is a globaly recognized credential that offers good foundational knowledge in safety and health as wel as a solid frameworkfor assessing hazardsand risks. This qualification is awarded by NEBOSH, the National Examination Board in Occupational Safety and Health, UK’s leading health and safety professional body with 40 years’ experience in providing up to date and relevantexaminations."}
  title={"COURSE OVERVIEW"}  icon={FaList} />
 </div>
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+<div style={{padding:10}}>
 <Citem content={"The International General Certificate (NEBOSH IG) wil involve a minimum of 65 taught hours and approximately 40 hours of private study and background reading"}
  title={"DURATION"}  icon={FaClock} />
 </div>
 
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+<div style={{padding:10}}>
 <Citem content={"For entry requirements for this qualification, For further information please kindly visit nebosh website by click here"}
  title={"ENTRY REQUIREMENTS"}  icon={FaBookOpen} />
 </div>
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+<div style={{padding:10}}>
 <Citem content={"This modern qualification combines activities, learning and interactive materials to provide you with an interesting and engaging experience. It focuses on key skils that means you can instantly apply the knowledgeyou gain and add value to your organisation. Assessment is a two-step process:"}
  title={"ASSESSMENT"}  icon={FaCheckCircle} />
 </div>
 
 
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+<div style={{padding:10}}>
 <Citem 
 content={<Accord f1={"Managing health and saftey"} f2={
   <div>
@@ -171,7 +171,7 @@ immediately useful and valuable.
 
 
 
-<div style={{margin:"0px 100px 10px 100px"}}>
+<div style={{padding:10}}>
 <Citem 
 content={
   <div>
@@ -209,7 +209,7 @@ fal into the same trap.
 
 
 
-<div id="enroll" style={{margin:"0px 100px 10px 100px"}}>
+<div id="enroll" style={{padding:10}}>
 <Citem 
 content={
  <Enroll
