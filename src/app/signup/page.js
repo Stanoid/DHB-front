@@ -21,6 +21,9 @@ export default function Home() {
   const router = useRouter()
   const [email, setEmail] = useState("");
   const [name, setname] = useState("");
+  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState({data:[]});
+  const [Cfile, setCFile] = useState(null);
   const [age, setage] = useState("");
   const [adress, setadress] = useState("");
   const [gender, setgender] = useState("");
@@ -30,7 +33,7 @@ export default function Home() {
 
   const [pass, setPass] = useState("");
   const [cpass, setcPass] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(3);
 
 
 
@@ -1838,7 +1841,7 @@ console.log(message)
 
 
 
-      login();
+      setPage(3);
     }
 
 
@@ -1910,8 +1913,105 @@ console.log(message)
   }
 
 
+
+  const uploadImage = () => {
+    
+    if(Cfile==null || file==null || files.data.length==0){
+      alert("Please upload ID and ID check photos")
+      return
+    }
+
+
+    let oldarr = [];
+     
+
+    
+let doo = new Promise(function(suc) {
+   // "Producing Code" (May take some time)
+
+  
+      
+       console.log("began")
+       const data = new FormData()
+       data.append("file", file)
+       data.append("upload_preset", "products")
+       data.append("cloud_name","strapimedia")
+       fetch("  https://api.cloudinary.com/v1_1/strapimedia/image/upload",{
+       method:"post",
+       body: data
+       })
+       .then(resp => resp.json())
+       .then(data => { 
+
+        oldarr = oldarr.concat({idphoto:data.url})
+         console.log("first data",data)
+
+
+
+         
+     
+let doo1 = new Promise(function(suc) {
+  // "Producing Code" (May take some time)
+
+ 
+     
+      console.log("began")
+      const data = new FormData()
+      data.append("file", Cfile)
+      data.append("upload_preset", "products")
+      data.append("cloud_name","strapimedia")
+      fetch("  https://api.cloudinary.com/v1_1/strapimedia/image/upload",{
+      method:"post",
+      body: data
+      })
+      .then(resp => resp.json())
+      .then(data => { 
+
+       oldarr = oldarr.concat({idcheckphoto:data.url})
+        login();
+      })
+      .catch(err => console.log(err))
+  });
+doo1.then( 
+        function(ob){
+        
+
+      }
+  ); 
+
+
+
+
+
+       })
+       .catch(err => console.log(err))
+   });
+doo.then( 
+         function(ob){
+         
+
+       }
+   ); 
+
+   
+
+  
+ 
+
+
+      
+   
+   }
+
+
+
   const login=()=>{
 
+
+   
+
+
+   
 
 
     // if(cpass!=pass){
@@ -1933,6 +2033,7 @@ console.log(message)
     type:4,
     email: email,
     phone:mob,
+    images:files,
     gender:gender,
     age:age,
     nationality:nat,
@@ -2018,6 +2119,12 @@ console.log(requestOptions);
                       w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                        dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jhone Doe" required=""/>
                   </div>
+
+
+              
+
+
+                
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                       <input
@@ -2096,7 +2203,7 @@ console.log(requestOptions);
 
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
-                      <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <select onChange={(e)=>{setgender(e.target.value)}} id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
   <option selected>Select Gender</option>
   <option value="M">Male</option>
   <option value="F">Female</option>
@@ -2246,36 +2353,62 @@ console.log(requestOptions);
 
               
 
-              <div>
-                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID type</label>
-                      <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-  <option selected>Select ID</option>
-  <option value="M">Passport</option>
-  <option value="F">Driver licsence</option>
-  <option value="F">Other document</option>
-</select>
-                  </div>
+            
+
+
+                
 
 
 
 
-                  <div>
-                      <label for="adress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID file</label>
+                  <div style={{marginTop:20}}>
+                      <label for="adress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Photo</label>
+                     
+                      <h4 style={{padding:10,textAlign:"center"}}>Take a photo of a valid ID Document (Passport, Driver License, any goverment issued document)</h4>
                    
                    
 <div class="flex items-center justify-center w-full">
     <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+        <div style={{display:file.name}} class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
             </svg>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG or GIF (MAX. 800x400px)</p>
         </div>
-        <input id="dropzone-file" type="file" class="hidden" />
+        <input 
+          accept="image/png, image/gif, image/jpeg"
+           onChange={(event)=>{setFile(event.target.files[0])}} 
+        id="dropzone-file" type="file" class="hidden" />
     </label>
+   
 </div> 
+<h1>{file&&file.name}</h1>
+                  </div>
+                  <br/> <br/>
 
+                  <div>
+                      <label for="adress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID check Photo</label>
+                     
+                      <h4 style={{padding:10,textAlign:"center"}}>Take a photo holding your ID with your face in the image</h4>
+                   
+<div class="flex items-center justify-center w-full">
+    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div style={{display:file.name}} class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG or GIF (MAX. 800x400px)</p>
+        </div>
+        <input 
+          accept="image/png, image/gif, image/jpeg"
+           onChange={(event)=>{setCFile(event.target.files[0])}} 
+        id="dropzone-file" type="file" class="hidden" />
+    </label>
+   
+</div> 
+<h1>{Cfile&&Cfile.name}</h1>
                   </div>
 
 
