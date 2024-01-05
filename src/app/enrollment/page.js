@@ -286,7 +286,7 @@ setResults(score);
   
   console.log(score+" out of "+ Ttest.length);
   setPResults(score);
-     settPCheat(true); 
+     settPCheat(false); 
   
   
   
@@ -668,26 +668,9 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
   </div>
 
 
-  <div style={{display:Pcheat?"flex":"none",flexDirection:"column",justifyContent:"center",
-      alignItems:"center",backgroundColor:"rgba(0,255,0,0.6)",
-       color:"white",fontSize:25,fontWeight:"bold",
-      padding:20,borderRadius:10}}>
-        <div>
-        Your Score:
-        </div>
+  
 
-        <div>
-        {Presults+ "/"+ Ptest.length}
-        </div>
-       
-      </div>
-
-      <div style={{textAlign:"center",margin:20,cursor:"pointer"}}>
-<div onClick={()=>{checkPtest(); }}  style={{display:"flex",justifyContent:"center",alignItems:"center"}} class="w-full px-4 py-2 text-sm text-white font-medium text-white bg-blue-500 border border-gray-300 
-rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"> 
- <span style={{marginRight:10}}>Check Answers</span> <FaCheckCircle/> </div>
-</div> 
-
+    
 
 
 </div>

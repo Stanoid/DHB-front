@@ -16,6 +16,8 @@ const Print = (props) => {
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="chippz" class="mx-auto w-16 py-4" />
     <div class="flex flex-col justify-center items-center gap-2">
         <h4 class="font-semibold">DHB training center</h4>
+        <h1>Initial invoice </h1>
+        <h5 style={{fontSize:10,color:"darkgray",textAlign:"center",fontWeight:"bold"}}>This Receipt is an initial Receipt just to confirm bill and not a payment Receipt</h5>
        
     </div>
     <div class="flex flex-col gap-3 border-b py-6 text-xs">

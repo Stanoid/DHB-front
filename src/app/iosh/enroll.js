@@ -25,6 +25,7 @@ function Enroll(props) {
        <div style={{display:"flex",alignItems:"center",alignItems:"center"}}><FaGraduationCap/> <div style={{marginLeft:5}} > Qualifications :</div> </div> 
       <div style={{color:"black",fontWeight:"bold",marginLeft:10}}>{props.data.name}</div>
     </div>
+    
 
 
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:5}}>
