@@ -11,7 +11,7 @@ import iosh from "./img/iosh.jpg";
 import Link from "next/link";
 import { useState } from "react";
 import emc from "./img/emc.jpg";
-
+import {FaClock } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ig from "./img/ig.jpg";
 import Course from "./cunit";
@@ -27,6 +27,8 @@ export default function Reports() {
   const [cinfo, setCenfo] = useState([]);
   const [lecs, setLecs] = useState([]);
   const router = new useRouter();
+  const [paid, setPaid] = useState(false);
+  const [ver, setVer] = useState(false);
   const cookies = new Cookies();
   useEffect(() => {
     isLogged(2);
@@ -63,7 +65,9 @@ export default function Reports() {
     , requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log("aasaxxcc",data)
+        console.log("aasaxxcc",data);
+        setPaid(data.data[0].attributes.paid);
+        setVer(data.data[0].attributes.ver)
         if(data.data.length==0){
           return
         }
@@ -111,9 +115,20 @@ export default function Reports() {
         x-data
         x-init="$el.focus()"
       >
+<div style={{display:binfo.length==0?"none":"flex"}}>
+<div style={{ display:paid&&ver?"none":"flex", width:"100%",padding:10}}>
+<div style={{display:"flex",fontWeight:"bold",textAlign:"center",flexDirection:"column",color:"#cc3300",width:"100%",backgroundColor:"white",padding:20}} >
+<FaClock style={{fontSize:30}} />
+          Waiting for admin approval for your enrollment application <br/>
+          Lectures will appear here once admin approves.
+        </div>
+</div>
+</div>
+
+
         
 
-<div style={{display:"flex",width:"100%",padding:10}} id="dash">
+<div style={{display:paid&&ver?"flex":"none",width:"100%",padding:10}} id="dash">
 <div style={{display:binfo.length==0?"none":"flex",flexDirection:"column",color:"#6E6E6E", height:"100%",width:"100%",backgroundColor:"white",padding:20}} id="dashin">
 
 <div>
@@ -127,7 +142,7 @@ export default function Reports() {
 
 
 
- <div style={{marginTop:20}} className="sm:p-0 lg:p-5">
+ <div  style={{marginTop:20}} className="sm:p-0 lg:p-5">
 
 
 

@@ -33,7 +33,7 @@ export default function Home() {
 
   const [pass, setPass] = useState("");
   const [cpass, setcPass] = useState("");
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
 
 
 
@@ -1833,7 +1833,7 @@ console.log(message)
 
   const thirdpageval = ()=>{
 
-    if(age==""||gender==""||nat==""||phone=="",adress==""||cont==""){
+    if(age==""||gender==""||nat==""||mob=="",adress==""||cont==""){
     notify("warn","All feilds are requiered")
     }else{
 
@@ -1916,7 +1916,7 @@ console.log(message)
 
   const uploadImage = () => {
     
-    if(Cfile==null || file==null || files.data.length==0){
+    if(Cfile==null || file==null){
       alert("Please upload ID and ID check photos")
       return
     }
@@ -1945,50 +1945,16 @@ let doo = new Promise(function(suc) {
 
         oldarr = oldarr.concat({idphoto:data.url})
          console.log("first data",data)
-
-
-
-         
-     
-let doo1 = new Promise(function(suc) {
-  // "Producing Code" (May take some time)
-
- 
-     
-      console.log("began")
-      const data = new FormData()
-      data.append("file", Cfile)
-      data.append("upload_preset", "products")
-      data.append("cloud_name","strapimedia")
-      fetch("  https://api.cloudinary.com/v1_1/strapimedia/image/upload",{
-      method:"post",
-      body: data
-      })
-      .then(resp => resp.json())
-      .then(data => { 
-
-       oldarr = oldarr.concat({idcheckphoto:data.url})
-        login();
-      })
-      .catch(err => console.log(err))
-  });
-doo1.then( 
-        function(ob){
-        
-
-      }
-  ); 
-
-
-
-
-
+    check(oldarr);
+          
        })
        .catch(err => console.log(err))
    });
 doo.then( 
          function(ob){
-         
+
+          
+   
 
        }
    ); 
@@ -2004,9 +1970,47 @@ doo.then(
    }
 
 
+   const check = (oldarr)=>{
+           
+     
+let doo1 = new Promise(function(suc) {
+  // "Producing Code" (May take some time)
+
+ 
+     
+      console.log("began again")
+      const data = new FormData()
+      data.append("file", Cfile)
+      data.append("upload_preset", "products")
+      data.append("cloud_name","strapimedia")
+      fetch("  https://api.cloudinary.com/v1_1/strapimedia/image/upload",{
+      method:"post",
+      body: data
+      })
+      .then(resp => resp.json())
+      .then(data => { 
+
+       oldarr = oldarr.concat({idcheckphoto:data.url})
+       
+       setFiles({data:oldarr})
+        login();
+      })
+      .catch(err => console.log(err))
+  });
+doo1.then( 
+        function(ob){
+       
+
+      }
+  );
+   }
+
+
 
   const login=()=>{
 
+
+ 
 
    
 
@@ -2369,7 +2373,7 @@ console.log(requestOptions);
                    
 <div class="flex items-center justify-center w-full">
     <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        <div style={{display:file.name}} class="flex flex-col items-center justify-center pt-5 pb-6">
+        <div  class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
             </svg>
@@ -2393,8 +2397,8 @@ console.log(requestOptions);
                       <h4 style={{padding:10,textAlign:"center"}}>Take a photo holding your ID with your face in the image</h4>
                    
 <div class="flex items-center justify-center w-full">
-    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        <div style={{display:file.name}} class="flex flex-col items-center justify-center pt-5 pb-6">
+    <label for="dropzone-filec" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
             </svg>
@@ -2404,7 +2408,7 @@ console.log(requestOptions);
         <input 
           accept="image/png, image/gif, image/jpeg"
            onChange={(event)=>{setCFile(event.target.files[0])}} 
-        id="dropzone-file" type="file" class="hidden" />
+        id="dropzone-filec" type="file" class="hidden" />
     </label>
    
 </div> 
@@ -2425,7 +2429,7 @@ console.log(requestOptions);
                      dark:hover:bg-primary-700 dark:focus:ring-primary-800">Back</div>
                 
             
-                  <div onClick={()=>{login()}} style={{backgroundColor:MAIN_STYLE.primary}} class="w-full text-white bg-primary-600
+                  <div onClick={()=>{uploadImage()}} style={{backgroundColor:MAIN_STYLE.primary}} class="w-full text-white bg-primary-600
                    hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300
                     font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600
                      dark:hover:bg-primary-700 dark:focus:ring-primary-800">signup</div>

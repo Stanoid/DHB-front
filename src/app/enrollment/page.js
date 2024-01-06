@@ -77,6 +77,7 @@ export default function Enrollment() {
           bill: {
             "id":cdata&&cdata.attributes.course.data.id,
           "bid":cdata.id,
+          "rid": cookies.get("login").user&&cookies.get("login").user.id + "1123" ,
             "bname":cdata&&cdata.attributes.course.data.attributes.name,
           "cname": cdata&&cdata.attributes.name,
           "price": cdata&&cdata.attributes.course.data.attributes.price},
