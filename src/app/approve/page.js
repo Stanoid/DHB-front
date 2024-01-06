@@ -48,7 +48,7 @@ export default function Reports() {
         <div  style={{padding:10,color:"black"}}>
          <h1 style={{fontSize:25,fontWeight:"bold",color:"darkgray"}}>Pending Enrollment requests:</h1>
           
-          <div style={{display:"flex"}}>
+          <div style={{display:"flex",flexDirection:'column'}}>
 
           {subs&&subs.map((item, index) => (
                <Subel   data={item} />
