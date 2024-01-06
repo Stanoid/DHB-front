@@ -1992,8 +1992,9 @@ let doo1 = new Promise(function(suc) {
 
        oldarr = oldarr.concat({idcheckphoto:data.url})
        
-       setFiles({data:oldarr})
-        login();
+      //  setFiles({data:oldarr})
+       console.log("aaaassddff",oldarr)
+        login(oldarr);
       })
       .catch(err => console.log(err))
   });
@@ -2007,7 +2008,9 @@ doo1.then(
 
 
 
-  const login=()=>{
+  const login=(oldarr)=>{
+console.log("files",oldarr);
+
 
 
  
@@ -2037,7 +2040,7 @@ doo1.then(
     type:4,
     email: email,
     phone:mob,
-    images:files,
+    images:{data:oldarr},
     gender:gender,
     age:age,
     nationality:nat,
