@@ -66,11 +66,12 @@ export default function Reports() {
       .then((response) => response.json())
       .then((data) => {
         console.log("aasaxxcc",data);
-        setPaid(data.data[0].attributes.paid);
-        setVer(data.data[0].attributes.ver)
+      
         if(data.data.length==0){
           return
         }
+        setPaid(data.data[0].attributes.paid);
+        setVer(data.data[0].attributes.ver)
    setBid(data.data[0].attributes.bill.bid)
      getbatch();
    

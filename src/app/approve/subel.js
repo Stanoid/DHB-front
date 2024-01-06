@@ -7,6 +7,7 @@ function subel(props) {
 
     const cookies = new Cookies();
     const router = useRouter()
+    
 const veruser=(subid)=>{
 
     if(props.data.attributes.ver==true){
@@ -141,13 +142,13 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
   
   <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
     <h3>ID Photo</h3>
-  <img width={200} src={props.data.attributes.user.data.attributes.images.data[0].idphoto} />
+  <img width={200} src={props.data.attributes&&props.data.attributes.user.data.attributes.images.data[0].idphoto} />
     </div>
 
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
     <h3>ID Check Photo</h3>
     
-    <img width={200} src={props.data.attributes.user.data.attributes.images.data[1].idcheckphoto} />
+    <img width={200} src={props.data.attributes&&props.data.attributes.user.data.attributes.images.data[1].idcheckphoto} />
     </div>
 
     <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
