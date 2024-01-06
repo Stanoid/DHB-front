@@ -30,6 +30,7 @@ export default function Reports() {
       .then((data) => {
        
         console.log("object", data);
+      
         setSubs(data.data)
       });
   };
