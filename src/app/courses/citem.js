@@ -19,7 +19,7 @@ function citem(props) {
 <div className="w-2/12" style={{display:"flex",alignContent:"center",justifyContent:"center"}}>
   
     </div>
-<div  className="w-10/12" style={{display:"flex",color:"grey",alignContent:"center",justifyContent:"flex-start"}}>
+<div  className={props.full==true?"w-12/12":"w-10/12"} style={{display:"flex",color:"grey",alignContent:"center",justifyContent:"flex-start"}}>
 {props.content}
 </div>
     </div>

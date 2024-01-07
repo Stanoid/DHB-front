@@ -124,6 +124,7 @@ export default function Reports() {
           Lectures will appear here once admin approves.
         </div>
 </div>
+
 </div>
 
 
@@ -168,11 +169,14 @@ export default function Reports() {
 
 
         <div style={{display:"flex",alignItems:"center", justifyContent:"center"}}>
+
+
           
-        
-          {item.status==1?<div  style={{backgroundColor:"grey",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}
-          
-     > JOIN </div> :
+        <a href={item.file}>
+        <div  style={{display:item.status==3?"":"none",marginRight:10,backgroundColor:"green",padding:10,borderRadius:5,color:"white",fontWeight:"bold"}}> Download </div> 
+
+        </a>
+          {item.status==1?<div></div>:
           
           
 
@@ -211,7 +215,7 @@ export default function Reports() {
         </div>
 
         <div
-        className="sm:flex-col flex-col lg:flex-row md:flex-row"
+        className="sm:flex-col flex-col lg:flex-col md:flex-col"
           style={{
             display: "flex",
             justifyContent: "space-around",

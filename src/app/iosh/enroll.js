@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import wa from "../iosh/img/wa.png"
 import Image from 'next/image'
 import Link from "next/link";
+import el from './el';
 import Router from 'next/router'
 import { FaClock,FaGraduationCap,FaDollarSign,FaBuilding,FaLanguage,FaCalendar,FaCertificate,FaQuestionCircle,FaArrowCircleRight, FaWhatsappSquare } from 'react-icons/fa'
 
@@ -17,14 +18,16 @@ function Enroll(props) {
 
   return (
 
-<div className='sm:w-full lg:w-1/2 md:w-1/2' style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
+<div className='sm:w-full lg:w-1/2 md:w-1/2' style={{display:"flex",width:"80vw",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
    <div className='sm:w-full lg:w-1/2 md:w-1/2' style={{display:"flex",alignItems:"flex-start",justifyContent:"center"}}>
-    <div className='   w-1/2' style={{display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column"}}>
+    <div className='   w-1/2' style={{display:"flex",justifyContent:"center",padding:10,alignItems:"flex-start",flexDirection:"column"}}>
    
     <div style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"center",marginTop:5}}>
        <div style={{display:"flex",alignItems:"center",alignItems:"center"}}><FaGraduationCap/> <div style={{marginLeft:5}} > Qualifications :</div> </div> 
       <div style={{color:"black",fontWeight:"bold",marginLeft:10}}>{props.data.name}</div>
     </div>
+
+    
     
 
 
@@ -50,7 +53,7 @@ function Enroll(props) {
     </div>
 
 
-    <div   style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column"}}
+    <div className='   w-1/2'   style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",padding:10}}
     
     
     >
@@ -100,7 +103,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 {
   props.short?
   <div></div>:        
-  <div style={{width:"100vw",marginTop:40,borderRadius:5,backgroundColor:"white"}}  class="relative overflow-x-auto">
+  <div style={{width:"100%",marginTop:40,borderRadius:5,backgroundColor:"white"}}  class="relative overflow-x-auto">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -111,9 +114,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
                       Start Date
                   </th>
                  
-                  <th scope="col" class="px-6 py-3">
-                      Exam Date
-                  </th>
+                
                   <th scope="col" class="px-6 py-3">
                       Register
                   </th>
@@ -121,10 +122,14 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
           </thead>
           <tbody>
 
+       
+
             
     {props.table&&props.table.map((item, index) => (
 
-<tr class="bg-white border-b  dark:border-gray-700">
+
+
+<tr  style={{display:item.attributes.status==2?"":"none"}}  class="bg-white border-b  dark:border-gray-700">
 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
     {item&&item.attributes.name}
 </th>
@@ -132,9 +137,7 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
    {item&&item.attributes.start}
 </td>
 
-<td class="px-6 py-4 text-gray-700">
-    {item&&item.attributes.end}
-</td>
+
 <td class="px-6 py-4 text-gray-700">
 
 <div  className='w-full h-full' style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column",marginTop:10}}>
@@ -177,6 +180,10 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
     
 </td>
 </tr>
+
+
+
+
 
            
           ))}

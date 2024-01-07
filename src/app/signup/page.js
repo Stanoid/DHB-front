@@ -21,6 +21,7 @@ export default function Home() {
   const router = useRouter()
   const [email, setEmail] = useState("");
   const [name, setname] = useState("");
+  const [ex, setex] = useState(false);
   const [file, setFile] = useState(null);
   const [files, setFiles] = useState({data:[]});
   const [Cfile, setCFile] = useState(null);
@@ -1893,6 +1894,7 @@ console.log(message)
 
 
         if(data.length!=0){
+          setex(true)
         
           notify("warn","Email already exists")
          

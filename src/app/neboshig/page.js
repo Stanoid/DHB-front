@@ -214,8 +214,9 @@ fal into the same trap.
 
 
 
-<div id="enroll" style={{padding:10}}>
+<div id="enroll" style={{padding:10,width:"100%"}}>
 <Citem 
+full={true}
 content={
  <Enroll
 

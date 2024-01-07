@@ -82,7 +82,7 @@ return
 
 
   return (
-    <div className="shadow-lg" style={{display:"flex",margin:10,flexDirection:"column",justifyContent:"space-between",
+    <div className="shadow-lg" style={{display:props.data.attributes.paid==true&props.data.attributes.ver==true?"none":"flex",margin:10,flexDirection:"column",justifyContent:"space-between",
     alignItems:"center",width:"100%",padding:20}}>
   <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"100%"}}>
 
