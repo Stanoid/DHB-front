@@ -65,15 +65,14 @@ export default function Reports() {
     , requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log("aasaxxcc",data);
-      
+       
         if(data.data.length==0){
           return
         }
         setPaid(data.data[0].attributes.paid);
         setVer(data.data[0].attributes.ver)
    setBid(data.data[0].attributes.bill.bid)
-     getbatch();
+     getbatch(data.data[0].attributes.bill.bid);
    
     setBinfo(data.data[0].attributes.bill.cname)
    
@@ -82,7 +81,7 @@ export default function Reports() {
 
 
   
-  const getbatch = () => {
+  const getbatch = (bid) => {
     console.log("batch id",bid)
     const requestOptions = {
       method: "GET",
@@ -97,9 +96,9 @@ export default function Reports() {
       .then((data) => {
         console.log("ssssdd batch data",data.data)
 
-    setLecs(data.data[0].attributes.lectures.lecs);
+    setLecs(data.data.attributes.lectures.lecs);
     console.log("batch state",lecs)
-    setCenfo(data.data[0].attributes.course.data.attributes.name);
+    setCenfo(data.data.attributes.course.data.attributes.name);
    
       });
   };
