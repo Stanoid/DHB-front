@@ -53,7 +53,7 @@ function Enroll(props) {
     </div>
 
 
-    <div className='   w-1/2'   style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",padding:10}}
+    <div className='   w-1/2'   style={{display: props.short?"none":"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column"}}
     
     
     >

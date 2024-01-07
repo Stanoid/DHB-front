@@ -37,6 +37,7 @@ export default function Enrollment() {
   const [name, setname] = useState(cookies.get("login").user.name);
   const [id, setid] = useState(cookies.get("login").user.id);
   const [email, setemail] = useState(cookies.get("login").user.email);
+  const [dubli, setdubly] = useState(1);
   const [test, setTest] = useState([]);
   const [results, setResults] = useState(0);
   const [Presults, setPResults] = useState(0);
@@ -57,7 +58,7 @@ export default function Enrollment() {
 
 
   const signUpFunc =()=>{
-
+setdubly(2)
     
 
     console.log("batchid",cdata );
@@ -95,6 +96,8 @@ export default function Enrollment() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setdubly(1)
+        
         router.push("/dashboard")
       });
 
@@ -196,8 +199,15 @@ if (!vcheck){
   const nextPage=()=>{
 if(page>6){
   // console.log("ddd",page);
-signUpFunc()
-  return;
+
+  if(dubli==2){
+alert("Please wait your request is being proccesed")
+  }else{
+    signUpFunc();
+    return
+  }
+
+  
 }
     
     
@@ -317,7 +327,7 @@ setResults(score);
       .then((response) => response.json())
       .then((data) => {
        
-     console.log("object", data);
+     console.log("yo thisssssssssssss", data);
      setCdata(data.data);
      getTest()
       });

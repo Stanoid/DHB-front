@@ -2,7 +2,7 @@ import {React,useEffect }from 'react'
 import Cookies from 'universal-cookie';
 import { API_URL } from '../../../utils/url';
 import { useRouter } from 'next/navigation';
-import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo,FaArrowCircleRight,FaArrowCircleLeft } from "react-icons/fa";
+import { FaList,FaClock,FaBookOpen,FaCheckCircle,FaListOl,FaInfo,FaTrash,FaArrowCircleLeft } from "react-icons/fa";
 function subel(props) {
 
     useEffect(() => {
@@ -43,6 +43,35 @@ return
         });
 
 }
+
+
+
+
+   
+const deletsub=(subid)=>{
+
+
+  const requestOptions = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + cookies.get("login").jwt,
+      },
+    
+    };
+
+    console.log(requestOptions);
+    fetch(`${API_URL}/subscriptions/${subid}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+       console.log("aaa",data)
+     location.reload()
+      
+
+      });
+
+}
+
 
 
 
@@ -167,8 +196,22 @@ rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:r
 </div>
     </div>
 
+
+ 
+
+    
+
  
   </div>
+
+  <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+    <div style={{textAlign:"center",marginTop:10,cursor:"pointer"}}>
+<div onClick={()=>{deletsub(props.data.id);}}  style={{display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"red"}} 
+class="w-full px-4 py-2 text-sm text-white font-medium bg-blue-500 border border-gray-300 
+rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 ">  
+<span style={{marginRight:10}}>DELETE</span> <FaTrash/> </div>
+</div>
+    </div>
   
     
         </div>  

@@ -40,7 +40,7 @@ export default function Reports() {
       .then((response) => response.json())
       .then((data) => {
         setCdata(data.data);
-        console.log("object", cdata);
+        console.log("objectyyyyyyyyyyyyyyyyyyyy", data);
       });
   };
 

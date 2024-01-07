@@ -3,9 +3,10 @@ import Image from 'next/image'
 import Enroll from '../iosh/enroll'
 function Course(props) {
   return (
-    <div style={{backgroundColor:"white",display:"flex",alignItems:"center",flexDirection:"column"
-    ,borderRadius:10,marginTop:20,width:"auto",color:"black",padding:15}}>
-     <Image
+    <div className="sm:w-1 md:w-1/3  lg:w-1/3 " style={{padding:10}}>
+      <div  style={{backgroundColor:"white",display:"flex",alignItems:"center",flexDirection:"column"
+    ,borderRadius:10,marginTop:20,color:"black",padding:15}}>
+        <Image
       src= {props.img}
       width={300}
       height={300}
@@ -36,6 +37,8 @@ function Course(props) {
 
 </div>
 
+    </div>
+   
 
         </div>
     

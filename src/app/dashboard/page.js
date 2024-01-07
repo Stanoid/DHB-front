@@ -215,7 +215,7 @@ export default function Reports() {
         </div>
 
         <div
-        className="sm:flex-col flex-col lg:flex-col md:flex-col"
+        className="sm:flex-col flex-col lg:flex-row md:flex-col"
           style={{
             display: "flex",
             justifyContent: "space-around",
