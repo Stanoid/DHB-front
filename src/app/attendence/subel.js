@@ -15,7 +15,7 @@ function subel(props) {
 
 
   const getattendence = () => {
-   // console.log("ssss",props.attob)
+    console.log("ssss",props.attob)
    let att = []
     for (let i = 0; i < props.attob.data.length; i++) {
       if(props.attob.data[i].testid==props.data.testid){
@@ -53,15 +53,17 @@ setSubs(att)
           
         {subs&&subs.map((item, index) => (
              
-<tr style={{border:"1px solid"}}>
+<tr style={{border:"1px solid",padding:10}}>
   <td>
-    {item.id}
+    {item.name}
   </td>
-
+<td>At </td>
   <td>
-    {item.testid}
+    {item.time}
   </td>
 </tr>
+
+
             
           ))}
        </tbody>
