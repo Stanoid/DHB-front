@@ -75,7 +75,7 @@ export default function Reports() {
        
         console.log("object", data.data.attributes.attendence);
         let lec = data.data.attributes.attendence;
-        lec.data.push({id:cookies.get("login").user.id,testid:NURL.get("testid"),score:Ttestresults});
+        lec.data.push({id:cookies.get("login").user.id,testid:NURL.get("testid"),score:Ttestresults,name:cookies.get("login").user.name});
 
         actat(lec);
 
