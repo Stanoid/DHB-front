@@ -62,6 +62,7 @@ export default function Reports() {
 
 
   const attendlec = () => {
+    let time  = new Date();
     const requestOptions = {
       method: "GET",
       headers: {
@@ -75,7 +76,7 @@ export default function Reports() {
        
         console.log("object", data.data.attributes.attendence);
         let lec = data.data.attributes.attendence;
-        lec.data.push({id:cookies.get("login").user.id,testid:NURL.get("testid"),score:Ttestresults,name:cookies.get("login").user.name});
+        lec.data.push({id:cookies.get("login").user.id,testid:NURL.get("testid"),score:Ttestresults,name:cookies.get("login").user.name,time: time});
 
         actat(lec);
 
@@ -222,10 +223,16 @@ export default function Reports() {
 if(data.data){
   for (let i = 0; i < data.data.attributes.attendence.data.length; i++) {
 
-    if(data.data.attributes.attendence.data[i].id==cookies.get("login").user.id){
-      setAttd(1);
+    if(data.data.attributes.attendence.data[i].testid==NURL.get("testid")){
+//console.log("aaa",data.data.attributes.attendence.data[i])
+if(data.data.attributes.attendence.data[i].id==cookies.get("login").user.id){
+  setAttd(1);
       console.log("aaa")
       setttCheat(1)
+}else{
+  console.log("no")
+}
+    
     }
   }
 }

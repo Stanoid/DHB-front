@@ -19,7 +19,10 @@ function subel(props) {
    let att = []
     for (let i = 0; i < props.attob.data.length; i++) {
       if(props.attob.data[i].testid==props.data.testid){
-        att.push(props.attob.data[i])
+        if(props.attob.data[i].name){
+          att.push(props.attob.data[i])   
+        }
+       
       }
     //console.log(props.attob.data[i]);
       
@@ -32,7 +35,7 @@ setSubs(att)
 
   return (
 
-    <div className="shadow-md" style={{padding:15,borderRadius:10,color:"black",flexDirection:"column",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+    <div  className="shadow-md" style={{padding:15,backgroundColor:props.data.status==2?"lightgreen":"",borderRadius:10,color:"black",flexDirection:"column",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
       <div style={{padding:15,borderRadius:10,color:"black",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
       <div style={{display:"flex",fontWeight:"bold",justifyContent:'center',alignItems:"center"}}>
  {props.data.id}-
@@ -46,10 +49,11 @@ setSubs(att)
       <div>
 
       <tbody style={{border:"1px solid black"}}>
+        
           
         {subs&&subs.map((item, index) => (
              
-<tr style={{border:"1 px solid black"}}>
+<tr style={{border:"1px solid"}}>
   <td>
     {item.id}
   </td>
